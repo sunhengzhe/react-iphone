@@ -54,6 +54,7 @@
   left: 15px;
   width: 316px;
   height: 562px;
+  overflow: hidden;
 }
 
 :local .home {
