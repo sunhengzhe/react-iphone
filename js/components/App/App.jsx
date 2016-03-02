@@ -1,37 +1,7 @@
 import React from 'react';
 import style from './App.css';
 
-const Mask = class extends React.Component {
-
-  constructor(...args) {
-    super(...args);
-    this.state = {
-      opacity: 1
-    }
-  }
-
-  open() {
-    this.setState({
-      opacity: 0
-    })
-  }
-
-  render(){
-    let style = {
-      position: 'absolute',
-      top: '0',
-      left: '0',
-      bottom: '0',
-      right: '0',
-      background: '#000000',
-      opacity: this.state.opacity,
-      transition: '0.5s'
-    }
-    return (
-      <div style={style}></div>
-    );
-  }
-}
+import Mask from '../Mask/Mask.jsx';
 
 const LockScreen = class extends React.Component {
   render(){
@@ -56,7 +26,7 @@ class App extends React.Component {
 
   handleHome() {
     if(this.state.status == 'close') {
-      // open the screen
+      // 开启屏幕
       this.setState({
         status: 'lock'
       })

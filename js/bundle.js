@@ -19740,6 +19740,10 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
+	var _Mask = __webpack_require__(221);
+
+	var _Mask2 = _interopRequireDefault(_Mask);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19748,55 +19752,8 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Mask = function (_React$Component) {
-	  _inherits(Mask, _React$Component);
-
-	  function Mask() {
-	    var _Object$getPrototypeO;
-
-	    _classCallCheck(this, Mask);
-
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Mask)).call.apply(_Object$getPrototypeO, [this].concat(args)));
-
-	    _this.state = {
-	      opacity: 1
-	    };
-	    return _this;
-	  }
-
-	  _createClass(Mask, [{
-	    key: 'open',
-	    value: function open() {
-	      this.setState({
-	        opacity: 0
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var style = {
-	        position: 'absolute',
-	        top: '0',
-	        left: '0',
-	        bottom: '0',
-	        right: '0',
-	        background: '#000000',
-	        opacity: this.state.opacity,
-	        transition: '0.5s'
-	      };
-	      return _react2.default.createElement('div', { style: style });
-	    }
-	  }]);
-
-	  return Mask;
-	}(_react2.default.Component);
-
-	var LockScreen = function (_React$Component2) {
-	  _inherits(LockScreen, _React$Component2);
+	var LockScreen = function (_React$Component) {
+	  _inherits(LockScreen, _React$Component);
 
 	  function LockScreen() {
 	    _classCallCheck(this, LockScreen);
@@ -19818,8 +19775,8 @@
 	  return LockScreen;
 	}(_react2.default.Component);
 
-	var Desktop = function (_React$Component3) {
-	  _inherits(Desktop, _React$Component3);
+	var Desktop = function (_React$Component2) {
+	  _inherits(Desktop, _React$Component2);
 
 	  function Desktop() {
 	    _classCallCheck(this, Desktop);
@@ -19841,33 +19798,33 @@
 	  return Desktop;
 	}(_react2.default.Component);
 
-	var App = function (_React$Component4) {
-	  _inherits(App, _React$Component4);
+	var App = function (_React$Component3) {
+	  _inherits(App, _React$Component3);
 
 	  function App() {
-	    var _Object$getPrototypeO2;
+	    var _Object$getPrototypeO;
 
 	    _classCallCheck(this, App);
 
-	    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-	      args[_key2] = arguments[_key2];
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
 	    }
 
 	    // status [close, lock, unlock]
 
-	    var _this4 = _possibleConstructorReturn(this, (_Object$getPrototypeO2 = Object.getPrototypeOf(App)).call.apply(_Object$getPrototypeO2, [this].concat(args)));
+	    var _this3 = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(App)).call.apply(_Object$getPrototypeO, [this].concat(args)));
 
-	    _this4.state = {
+	    _this3.state = {
 	      status: 'close'
 	    };
-	    return _this4;
+	    return _this3;
 	  }
 
 	  _createClass(App, [{
 	    key: 'handleHome',
 	    value: function handleHome() {
 	      if (this.state.status == 'close') {
-	        // open the screen
+	        // 开启屏幕
 	        this.setState({
 	          status: 'lock'
 	        });
@@ -19892,7 +19849,7 @@
 	          { className: _App2.default.screen },
 	          _react2.default.createElement(Desktop, null),
 	          _react2.default.createElement(LockScreen, null),
-	          _react2.default.createElement(Mask, { ref: 'mask' })
+	          _react2.default.createElement(_Mask2.default, { ref: 'mask' })
 	        ),
 	        _react2.default.createElement('div', { className: _App2.default.home, onMouseDown: this.handleHome.bind(this) })
 	      );
@@ -20261,6 +20218,92 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 221 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Mask = function (_React$Component) {
+	  _inherits(Mask, _React$Component);
+
+	  function Mask() {
+	    var _Object$getPrototypeO;
+
+	    _classCallCheck(this, Mask);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Mask)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+
+	    _this.state = {
+	      opacity: 1
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Mask, [{
+	    key: 'open',
+	    value: function open() {
+	      this.setState({
+	        opacity: 0
+	      });
+	      setTimeout(function () {
+	        this.refs.mask.style.display = 'none';
+	      }.bind(this), 500);
+	    }
+	  }, {
+	    key: 'close',
+	    value: function close() {
+	      this.setState({
+	        opacity: 1
+	      });
+	      setTimeout(function () {
+	        this.refs.mask.style.display = 'block';
+	      }, 500);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var style = {
+	        position: 'absolute',
+	        top: '0',
+	        left: '0',
+	        bottom: '0',
+	        right: '0',
+	        background: '#000000',
+	        opacity: this.state.opacity,
+	        transition: '0.5s ease-out'
+	      };
+	      return _react2.default.createElement('div', { style: style, ref: 'mask' });
+	    }
+	  }]);
+
+	  return Mask;
+	}(_react2.default.Component);
+
+	exports.default = Mask;
 
 /***/ }
 /******/ ]);
