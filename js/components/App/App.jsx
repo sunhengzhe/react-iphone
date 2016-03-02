@@ -3,6 +3,8 @@ import style from './App.css';
 
 import Mask from '../Mask/Mask.jsx';
 
+const CLOSE_TIME = 10;
+
 const LockScreen = class extends React.Component {
   render(){
     return (
@@ -20,17 +22,57 @@ class App extends React.Component {
     super(...args);
     // status [close, lock, unlock]
     this.state = {
-      status: 'close'
+      status: 'close',
+      leaveTime: 0,
+      leaveInterval: null
     }
   }
 
   handleHome() {
+    this.openScreen();
     if(this.state.status == 'close') {
       // 开启屏幕
-      this.setState({
-        status: 'lock'
-      })
-      this.refs.mask.open();
+      this.openScreen();
+    }
+  }
+
+  handleMouseMove() {
+    if(this.state.status != 'close') {
+      this.openScreen();
+    }
+  }
+
+  openScreen() {
+    clearInterval(this.state.leaveInterval);
+    this.setState({
+      status: 'lock',
+      leaveTime: 0
+    })
+    this.refs.mask.open();
+  }
+
+  closeScreen() {
+    clearInterval(this.state.leaveInterval);
+    this.setState({
+      status: 'close',
+      leaveTime: 0
+    });
+    this.refs.mask.close();
+  }
+
+  prepareClose() {
+    if(this.state.status != 'close') {
+      this.state.leaveInterval = setInterval(() => {
+        console.log('leave...' + this.state.leaveTime)
+        this.setState({
+          leaveTime: this.state.leaveTime + 1
+        });
+        if(this.state.leaveTime == CLOSE_TIME - 5) {
+          this.refs.mask.prepareClose();
+        }else if(this.state.leaveTime == CLOSE_TIME) {
+          this.closeScreen();
+        }
+      }, 1000);
     }
   }
 
@@ -42,12 +84,12 @@ class App extends React.Component {
           <div className={style.camera}></div>
           <div className={style.receiver}></div>
         </div>
-        <div className={style.screen}>
+        <div className={style.screen} onMouseUp={this.prepareClose.bind(this)} onMouseMove={this.handleMouseMove.bind(this)} onMouseLeave={this.prepareClose.bind(this)}>
           <Desktop />
           <LockScreen />
           <Mask ref="mask"/>
         </div>
-        <div className={style.home} onMouseDown={this.handleHome.bind(this)}></div>
+        <div className={style.home} onMouseDown={this.handleHome.bind(this)} onMouseUp={this.prepareClose.bind(this)}></div>
       </div>
     );
   }

@@ -13,17 +13,26 @@ class Mask extends React.Component {
     this.setState({
       opacity: 0
     });
-    setTimeout(function(){
+    setTimeout(() => {
       this.refs.mask.style.display = 'none';
-    }.bind(this), 500);
+    }, 500);
   }
 
   close() {
     this.setState({
       opacity: 1
     });
-    setTimeout(function(){
+    setTimeout(() => {
       this.refs.mask.style.display = 'block';
+    }, 500);
+  }
+
+  prepareClose() {
+    this.refs.mask.style.display = 'block';
+    setTimeout(() => {
+      this.setState({
+        opacity: 0.5
+      });
     }, 500);
   }
 

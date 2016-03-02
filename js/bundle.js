@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "F:\\learning\\iphone";
+/******/ 	__webpack_require__.p = "F:\\wold\\Study\\learning\\react-iphone";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -54,7 +54,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _App = __webpack_require__(216);
+	var _App = __webpack_require__(159);
 
 	var _App2 = _interopRequireDefault(_App);
 
@@ -19664,64 +19664,7 @@
 
 
 /***/ },
-/* 159 */,
-/* 160 */,
-/* 161 */,
-/* 162 */,
-/* 163 */,
-/* 164 */,
-/* 165 */,
-/* 166 */,
-/* 167 */,
-/* 168 */,
-/* 169 */,
-/* 170 */,
-/* 171 */,
-/* 172 */,
-/* 173 */,
-/* 174 */,
-/* 175 */,
-/* 176 */,
-/* 177 */,
-/* 178 */,
-/* 179 */,
-/* 180 */,
-/* 181 */,
-/* 182 */,
-/* 183 */,
-/* 184 */,
-/* 185 */,
-/* 186 */,
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */,
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */,
-/* 199 */,
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19736,11 +19679,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _App = __webpack_require__(217);
+	var _App = __webpack_require__(160);
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _Mask = __webpack_require__(221);
+	var _Mask = __webpack_require__(164);
 
 	var _Mask2 = _interopRequireDefault(_Mask);
 
@@ -19751,6 +19694,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CLOSE_TIME = 10;
 
 	var LockScreen = function (_React$Component) {
 	  _inherits(LockScreen, _React$Component);
@@ -19815,7 +19760,9 @@
 	    var _this3 = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(App)).call.apply(_Object$getPrototypeO, [this].concat(args)));
 
 	    _this3.state = {
-	      status: 'close'
+	      status: 'close',
+	      leaveTime: 0,
+	      leaveInterval: null
 	    };
 	    return _this3;
 	  }
@@ -19823,12 +19770,56 @@
 	  _createClass(App, [{
 	    key: 'handleHome',
 	    value: function handleHome() {
+	      this.openScreen();
 	      if (this.state.status == 'close') {
 	        // 开启屏幕
-	        this.setState({
-	          status: 'lock'
-	        });
-	        this.refs.mask.open();
+	        this.openScreen();
+	      }
+	    }
+	  }, {
+	    key: 'handleMouseMove',
+	    value: function handleMouseMove() {
+	      if (this.state.status != 'close') {
+	        this.openScreen();
+	      }
+	    }
+	  }, {
+	    key: 'openScreen',
+	    value: function openScreen() {
+	      clearInterval(this.state.leaveInterval);
+	      this.setState({
+	        status: 'lock',
+	        leaveTime: 0
+	      });
+	      this.refs.mask.open();
+	    }
+	  }, {
+	    key: 'closeScreen',
+	    value: function closeScreen() {
+	      clearInterval(this.state.leaveInterval);
+	      this.setState({
+	        status: 'close',
+	        leaveTime: 0
+	      });
+	      this.refs.mask.close();
+	    }
+	  }, {
+	    key: 'prepareClose',
+	    value: function prepareClose() {
+	      var _this4 = this;
+
+	      if (this.state.status != 'close') {
+	        this.state.leaveInterval = setInterval(function () {
+	          console.log('leave...' + _this4.state.leaveTime);
+	          _this4.setState({
+	            leaveTime: _this4.state.leaveTime + 1
+	          });
+	          if (_this4.state.leaveTime == CLOSE_TIME - 5) {
+	            _this4.refs.mask.prepareClose();
+	          } else if (_this4.state.leaveTime == CLOSE_TIME) {
+	            _this4.closeScreen();
+	          }
+	        }, 1000);
 	      }
 	    }
 	  }, {
@@ -19846,12 +19837,12 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: _App2.default.screen },
+	          { className: _App2.default.screen, onMouseUp: this.prepareClose.bind(this), onMouseMove: this.handleMouseMove.bind(this), onMouseLeave: this.prepareClose.bind(this) },
 	          _react2.default.createElement(Desktop, null),
 	          _react2.default.createElement(LockScreen, null),
 	          _react2.default.createElement(_Mask2.default, { ref: 'mask' })
 	        ),
-	        _react2.default.createElement('div', { className: _App2.default.home, onMouseDown: this.handleHome.bind(this) })
+	        _react2.default.createElement('div', { className: _App2.default.home, onMouseDown: this.handleHome.bind(this), onMouseUp: this.prepareClose.bind(this) })
 	      );
 	    }
 	  }]);
@@ -19862,16 +19853,16 @@
 	exports.default = App;
 
 /***/ },
-/* 217 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(218);
+	var content = __webpack_require__(161);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(220)(content, {});
+	var update = __webpack_require__(163)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -19888,15 +19879,15 @@
 	}
 
 /***/ },
-/* 218 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(219)();
+	exports = module.exports = __webpack_require__(162)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "._1MXGw0vo01QToWO3V63Ym0 {\n  margin: 10px auto;\n  background: #F2F3F5;\n  width: 346px;\n  height: 722px;\n  position: relative;\n  border-radius: 50px;\n  border-style: solid;\n  border-color: #c0c0c0;\n  border-top-width: 2px;\n  border-left-width: 5px;\n  border-bottom-width: 2px;\n  border-right-width: 5px;\n}\n\n._366WPQ-tTsJ8HCDdl7Na89 {\n  position: absolute;\n  top: 15px;\n  left: 50%;\n  width: 110px;\n  height: 40px;\n  transform: translate(-50%, 0);\n}\n\n._2f2Mx5k4-pzsL0ckkvDMq_ {\n  width: 10px;\n  height: 10px;\n  border-radius: 50%;\n  background: #000000;\n  margin: 0 auto;\n}\n\n._2JlxJcW6DOeMiFvXgEhTic {\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  position: absolute;\n  background: #000000;\n  left: 0;\n  top: 17px;\n}\n\n._2VxocHUIewDj3C55_frEes {\n  width: 50px;\n  height: 6px;\n  border-radius: 6px;\n  background: #000000;\n  margin: 10px auto;\n}\n\n._3yAfwqwiCtGZQnsExrB5SD {\n  position: absolute;\n  top: 80px;\n  left: 15px;\n  width: 316px;\n  height: 562px;\n  overflow: hidden;\n}\n\n._2lfvYvOo5zLSPdmxjPbLzi {\n  position: absolute;\n  bottom: 15px;\n  left: 50%;\n  width: 55px;\n  height: 55px;\n  border-radius: 50%;\n  border: 3px #c0c0c0 solid;\n  box-sizing: border-box;\n  transform: translate(-50%, 0);\n  cursor: pointer;\n}\n\n", ""]);
+	exports.push([module.id, "._1MXGw0vo01QToWO3V63Ym0 {\r\n  margin: 10px auto;\r\n  background: #F2F3F5;\r\n  width: 346px;\r\n  height: 722px;\r\n  position: relative;\r\n  border-radius: 50px;\r\n  border-style: solid;\r\n  border-color: #c0c0c0;\r\n  border-top-width: 2px;\r\n  border-left-width: 5px;\r\n  border-bottom-width: 2px;\r\n  border-right-width: 5px;\r\n}\r\n\r\n._366WPQ-tTsJ8HCDdl7Na89 {\r\n  position: absolute;\r\n  top: 15px;\r\n  left: 50%;\r\n  width: 110px;\r\n  height: 40px;\r\n  transform: translate(-50%, 0);\r\n}\r\n\r\n._2f2Mx5k4-pzsL0ckkvDMq_ {\r\n  width: 10px;\r\n  height: 10px;\r\n  border-radius: 50%;\r\n  background: #000000;\r\n  margin: 0 auto;\r\n}\r\n\r\n._2JlxJcW6DOeMiFvXgEhTic {\r\n  width: 12px;\r\n  height: 12px;\r\n  border-radius: 50%;\r\n  position: absolute;\r\n  background: #000000;\r\n  left: 0;\r\n  top: 17px;\r\n}\r\n\r\n._2VxocHUIewDj3C55_frEes {\r\n  width: 50px;\r\n  height: 6px;\r\n  border-radius: 6px;\r\n  background: #000000;\r\n  margin: 10px auto;\r\n}\r\n\r\n._3yAfwqwiCtGZQnsExrB5SD {\r\n  position: absolute;\r\n  top: 80px;\r\n  left: 15px;\r\n  width: 316px;\r\n  height: 562px;\r\n  overflow: hidden;\r\n}\r\n\r\n._2lfvYvOo5zLSPdmxjPbLzi {\r\n  position: absolute;\r\n  bottom: 15px;\r\n  left: 50%;\r\n  width: 55px;\r\n  height: 55px;\r\n  border-radius: 50%;\r\n  border: 3px #c0c0c0 solid;\r\n  box-sizing: border-box;\r\n  transform: translate(-50%, 0);\r\n  cursor: pointer;\r\n}\r\n\r\n", ""]);
 
 	// exports
 	exports.locals = {
@@ -19910,7 +19901,7 @@
 	};
 
 /***/ },
-/* 219 */
+/* 162 */
 /***/ function(module, exports) {
 
 	/*
@@ -19966,7 +19957,7 @@
 
 
 /***/ },
-/* 220 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -20220,7 +20211,7 @@
 
 
 /***/ },
-/* 221 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20266,21 +20257,37 @@
 	  _createClass(Mask, [{
 	    key: 'open',
 	    value: function open() {
+	      var _this2 = this;
+
 	      this.setState({
 	        opacity: 0
 	      });
 	      setTimeout(function () {
-	        this.refs.mask.style.display = 'none';
-	      }.bind(this), 500);
+	        _this2.refs.mask.style.display = 'none';
+	      }, 500);
 	    }
 	  }, {
 	    key: 'close',
 	    value: function close() {
+	      var _this3 = this;
+
 	      this.setState({
 	        opacity: 1
 	      });
 	      setTimeout(function () {
-	        this.refs.mask.style.display = 'block';
+	        _this3.refs.mask.style.display = 'block';
+	      }, 500);
+	    }
+	  }, {
+	    key: 'prepareClose',
+	    value: function prepareClose() {
+	      var _this4 = this;
+
+	      this.refs.mask.style.display = 'block';
+	      setTimeout(function () {
+	        _this4.setState({
+	          opacity: 0.5
+	        });
 	      }, 500);
 	    }
 	  }, {
