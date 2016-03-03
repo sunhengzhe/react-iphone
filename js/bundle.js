@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "F:\\wold\\Study\\learning\\react-iphone";
+/******/ 	__webpack_require__.p = "images";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -19687,6 +19687,10 @@
 
 	var _Mask2 = _interopRequireDefault(_Mask);
 
+	var _LockScreen = __webpack_require__(165);
+
+	var _LockScreen2 = _interopRequireDefault(_LockScreen);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19697,31 +19701,8 @@
 
 	var CLOSE_TIME = 10;
 
-	var LockScreen = function (_React$Component) {
-	  _inherits(LockScreen, _React$Component);
-
-	  function LockScreen() {
-	    _classCallCheck(this, LockScreen);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(LockScreen).apply(this, arguments));
-	  }
-
-	  _createClass(LockScreen, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        'LockScreen'
-	      );
-	    }
-	  }]);
-
-	  return LockScreen;
-	}(_react2.default.Component);
-
-	var Desktop = function (_React$Component2) {
-	  _inherits(Desktop, _React$Component2);
+	var Desktop = function (_React$Component) {
+	  _inherits(Desktop, _React$Component);
 
 	  function Desktop() {
 	    _classCallCheck(this, Desktop);
@@ -19743,8 +19724,8 @@
 	  return Desktop;
 	}(_react2.default.Component);
 
-	var App = function (_React$Component3) {
-	  _inherits(App, _React$Component3);
+	var App = function (_React$Component2) {
+	  _inherits(App, _React$Component2);
 
 	  function App() {
 	    var _Object$getPrototypeO;
@@ -19757,14 +19738,14 @@
 
 	    // status [close, lock, unlock]
 
-	    var _this3 = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(App)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+	    var _this2 = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(App)).call.apply(_Object$getPrototypeO, [this].concat(args)));
 
-	    _this3.state = {
+	    _this2.state = {
 	      status: 'close',
 	      leaveTime: 0,
 	      leaveInterval: null
 	    };
-	    return _this3;
+	    return _this2;
 	  }
 
 	  _createClass(App, [{
@@ -19806,18 +19787,18 @@
 	  }, {
 	    key: 'prepareClose',
 	    value: function prepareClose() {
-	      var _this4 = this;
+	      var _this3 = this;
 
 	      if (this.state.status != 'close') {
 	        this.state.leaveInterval = setInterval(function () {
-	          console.log('leave...' + _this4.state.leaveTime);
-	          _this4.setState({
-	            leaveTime: _this4.state.leaveTime + 1
+	          console.log('leave...' + _this3.state.leaveTime);
+	          _this3.setState({
+	            leaveTime: _this3.state.leaveTime + 1
 	          });
-	          if (_this4.state.leaveTime == CLOSE_TIME - 5) {
-	            _this4.refs.mask.prepareClose();
-	          } else if (_this4.state.leaveTime == CLOSE_TIME) {
-	            _this4.closeScreen();
+	          if (_this3.state.leaveTime == CLOSE_TIME - 5) {
+	            _this3.refs.mask.prepareClose();
+	          } else if (_this3.state.leaveTime == CLOSE_TIME) {
+	            _this3.closeScreen();
 	          }
 	        }, 1000);
 	      }
@@ -19839,10 +19820,10 @@
 	          'div',
 	          { className: _App2.default.screen, onMouseUp: this.prepareClose.bind(this), onMouseMove: this.handleMouseMove.bind(this), onMouseLeave: this.prepareClose.bind(this) },
 	          _react2.default.createElement(Desktop, null),
-	          _react2.default.createElement(LockScreen, null),
+	          _react2.default.createElement(_LockScreen2.default, null),
 	          _react2.default.createElement(_Mask2.default, { ref: 'mask' })
 	        ),
-	        _react2.default.createElement('div', { className: _App2.default.home, onMouseDown: this.handleHome.bind(this), onMouseUp: this.prepareClose.bind(this) })
+	        _react2.default.createElement('a', { className: _App2.default.home, onMouseDown: this.handleHome.bind(this), onMouseUp: this.prepareClose.bind(this) })
 	      );
 	    }
 	  }]);
@@ -19887,7 +19868,7 @@
 
 
 	// module
-	exports.push([module.id, "._1MXGw0vo01QToWO3V63Ym0 {\r\n  margin: 10px auto;\r\n  background: #F2F3F5;\r\n  width: 346px;\r\n  height: 722px;\r\n  position: relative;\r\n  border-radius: 50px;\r\n  border-style: solid;\r\n  border-color: #c0c0c0;\r\n  border-top-width: 2px;\r\n  border-left-width: 5px;\r\n  border-bottom-width: 2px;\r\n  border-right-width: 5px;\r\n}\r\n\r\n._366WPQ-tTsJ8HCDdl7Na89 {\r\n  position: absolute;\r\n  top: 15px;\r\n  left: 50%;\r\n  width: 110px;\r\n  height: 40px;\r\n  transform: translate(-50%, 0);\r\n}\r\n\r\n._2f2Mx5k4-pzsL0ckkvDMq_ {\r\n  width: 10px;\r\n  height: 10px;\r\n  border-radius: 50%;\r\n  background: #000000;\r\n  margin: 0 auto;\r\n}\r\n\r\n._2JlxJcW6DOeMiFvXgEhTic {\r\n  width: 12px;\r\n  height: 12px;\r\n  border-radius: 50%;\r\n  position: absolute;\r\n  background: #000000;\r\n  left: 0;\r\n  top: 17px;\r\n}\r\n\r\n._2VxocHUIewDj3C55_frEes {\r\n  width: 50px;\r\n  height: 6px;\r\n  border-radius: 6px;\r\n  background: #000000;\r\n  margin: 10px auto;\r\n}\r\n\r\n._3yAfwqwiCtGZQnsExrB5SD {\r\n  position: absolute;\r\n  top: 80px;\r\n  left: 15px;\r\n  width: 316px;\r\n  height: 562px;\r\n  overflow: hidden;\r\n}\r\n\r\n._2lfvYvOo5zLSPdmxjPbLzi {\r\n  position: absolute;\r\n  bottom: 15px;\r\n  left: 50%;\r\n  width: 55px;\r\n  height: 55px;\r\n  border-radius: 50%;\r\n  border: 3px #c0c0c0 solid;\r\n  box-sizing: border-box;\r\n  transform: translate(-50%, 0);\r\n  cursor: pointer;\r\n}\r\n\r\n", ""]);
+	exports.push([module.id, "._1MXGw0vo01QToWO3V63Ym0 {\n  margin: 10px auto;\n  background: #F2F3F5;\n  width: 346px;\n  height: 722px;\n  position: relative;\n  border-radius: 50px;\n  border-style: solid;\n  border-color: #c0c0c0;\n  border-top-width: 2px;\n  border-left-width: 5px;\n  border-bottom-width: 2px;\n  border-right-width: 5px;\n}\n\n._366WPQ-tTsJ8HCDdl7Na89 {\n  position: absolute;\n  top: 15px;\n  left: 50%;\n  width: 110px;\n  height: 40px;\n  transform: translate(-50%, 0);\n}\n\n._2f2Mx5k4-pzsL0ckkvDMq_ {\n  width: 10px;\n  height: 10px;\n  border-radius: 50%;\n  background: #000000;\n  margin: 0 auto;\n}\n\n._2JlxJcW6DOeMiFvXgEhTic {\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  position: absolute;\n  background: #000000;\n  left: 0;\n  top: 17px;\n}\n\n._2VxocHUIewDj3C55_frEes {\n  width: 50px;\n  height: 6px;\n  border-radius: 6px;\n  background: #000000;\n  margin: 10px auto;\n}\n\n._3yAfwqwiCtGZQnsExrB5SD {\n  position: absolute;\n  top: 80px;\n  left: 15px;\n  width: 316px;\n  height: 562px;\n  overflow: hidden;\n}\n\n._2lfvYvOo5zLSPdmxjPbLzi {\n  display: inline-block;\n  position: absolute;\n  bottom: 15px;\n  left: 50%;\n  width: 55px;\n  height: 55px;\n  border-radius: 50%;\n  border: 3px #c0c0c0 solid;\n  box-sizing: border-box;\n  transform: translate(-50%, 0);\n  cursor: pointer;\n}\n\n._2lfvYvOo5zLSPdmxjPbLzi:active {\n  background: #E2E4E9;\n}\n", ""]);
 
 	// exports
 	exports.locals = {
@@ -20311,6 +20292,108 @@
 	}(_react2.default.Component);
 
 	exports.default = Mask;
+
+/***/ },
+/* 165 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _LockScreen = __webpack_require__(166);
+
+	var _LockScreen2 = _interopRequireDefault(_LockScreen);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var LockScreen = function (_React$Component) {
+	  _inherits(LockScreen, _React$Component);
+
+	  function LockScreen() {
+	    _classCallCheck(this, LockScreen);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(LockScreen).apply(this, arguments));
+	  }
+
+	  _createClass(LockScreen, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement('div', { className: _LockScreen2.default.bgWrap }),
+	        _react2.default.createElement('div', { className: _LockScreen2.default.lockWrap })
+	      );
+	    }
+	  }]);
+
+	  return LockScreen;
+	}(_react2.default.Component);
+
+	exports.default = LockScreen;
+
+/***/ },
+/* 166 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(167);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(163)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./LockScreen.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./LockScreen.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 167 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(162)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "._1X3Z75GPyyk6dSuoaYE8tq {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: url(" + __webpack_require__(168) + ") center center fixed;\n}", ""]);
+
+	// exports
+	exports.locals = {
+		"bgWrap": "_1X3Z75GPyyk6dSuoaYE8tq"
+	};
+
+/***/ },
+/* 168 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "/lock.jpg";
 
 /***/ }
 /******/ ]);

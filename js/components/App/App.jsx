@@ -2,16 +2,9 @@ import React from 'react';
 import style from './App.css';
 
 import Mask from '../Mask/Mask.jsx';
+import LockScreen from '../LockScreen/LockScreen.jsx';
 
 const CLOSE_TIME = 10;
-
-const LockScreen = class extends React.Component {
-  render(){
-    return (
-      <div>LockScreen</div>
-    );
-  }
-}
 
 const Desktop = class extends React.Component {
   render(){return (<div>Desktop</div>);}
@@ -89,7 +82,7 @@ class App extends React.Component {
           <LockScreen />
           <Mask ref="mask"/>
         </div>
-        <div className={style.home} onMouseDown={this.handleHome.bind(this)} onMouseUp={this.prepareClose.bind(this)}></div>
+        <a className={style.home} onMouseDown={this.handleHome.bind(this)} onMouseUp={this.prepareClose.bind(this)}></a>
       </div>
     );
   }

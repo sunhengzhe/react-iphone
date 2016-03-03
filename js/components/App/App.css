@@ -58,6 +58,7 @@
 }
 
 :local .home {
+  display: inline-block;
   position: absolute;
   bottom: 15px;
   left: 50%;
@@ -70,3 +71,6 @@
   cursor: pointer;
 }
 
+:local .home:active {
+  background: #E2E4E9;
+}

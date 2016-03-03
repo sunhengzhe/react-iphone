@@ -3,8 +3,8 @@ module.exports = {
   entry: "./js/app.js",
   output: {
     path: __dirname,
-    publicPath: __dirname,
-    filename: "/js/bundle.js"
+    filename: "/js/bundle.js",
+    publicPath: 'images'
   },
   module: {
     loaders: [
@@ -14,7 +14,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpg)$/,
-        loader: 'url-loader?limit=8192'
+        loader: 'url-loader?limit=8192,name=/[name].[ext]'
       },
       {
         test: /\.jsx?$/,
