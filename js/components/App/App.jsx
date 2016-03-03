@@ -3,12 +3,9 @@ import style from './App.css';
 
 import Mask from '../Mask/Mask.jsx';
 import LockScreen from '../LockScreen/LockScreen.jsx';
+import Desktop from '../Desktop/Desktop.jsx';
 
 const CLOSE_TIME = 10;
-
-const Desktop = class extends React.Component {
-  render(){return (<div>Desktop</div>);}
-}
 
 class App extends React.Component {
   constructor(...args) {
@@ -26,6 +23,9 @@ class App extends React.Component {
     if(this.state.status == 'close') {
       // 开启屏幕
       this.openScreen();
+    }else if(this.state.status == 'lock') {
+      // 移到主屏幕
+      this.refs.lockScreen.changeToMain();
     }
   }
 
@@ -50,7 +50,7 @@ class App extends React.Component {
       status: 'close',
       leaveTime: 0
     });
-    this.refs.mask.close();
+    this.refs.mask.close(this.refs.lockScreen.changeToMain.bind(this.refs.lockScreen));
   }
 
   prepareClose() {
@@ -79,8 +79,8 @@ class App extends React.Component {
         </div>
         <div className={style.screen} onMouseUp={this.prepareClose.bind(this)} onMouseMove={this.handleMouseMove.bind(this)} onMouseLeave={this.prepareClose.bind(this)}>
           <Desktop />
-          <LockScreen />
-          <Mask ref="mask"/>
+          <LockScreen ref="lockScreen"/>
+          <Mask ref="mask" />
         </div>
         <a className={style.home} onMouseDown={this.handleHome.bind(this)} onMouseUp={this.prepareClose.bind(this)}></a>
       </div>

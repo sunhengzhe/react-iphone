@@ -18,12 +18,13 @@ class Mask extends React.Component {
     }, 500);
   }
 
-  close() {
+  close(callback) {
     this.setState({
       opacity: 1
     });
     setTimeout(() => {
       this.refs.mask.style.display = 'block';
+      callback && callback();
     }, 500);
   }
 

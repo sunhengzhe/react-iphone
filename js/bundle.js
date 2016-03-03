@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "images";
+/******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -19691,6 +19691,10 @@
 
 	var _LockScreen2 = _interopRequireDefault(_LockScreen);
 
+	var _Desktop = __webpack_require__(169);
+
+	var _Desktop2 = _interopRequireDefault(_Desktop);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19701,31 +19705,8 @@
 
 	var CLOSE_TIME = 10;
 
-	var Desktop = function (_React$Component) {
-	  _inherits(Desktop, _React$Component);
-
-	  function Desktop() {
-	    _classCallCheck(this, Desktop);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Desktop).apply(this, arguments));
-	  }
-
-	  _createClass(Desktop, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        'Desktop'
-	      );
-	    }
-	  }]);
-
-	  return Desktop;
-	}(_react2.default.Component);
-
-	var App = function (_React$Component2) {
-	  _inherits(App, _React$Component2);
+	var App = function (_React$Component) {
+	  _inherits(App, _React$Component);
 
 	  function App() {
 	    var _Object$getPrototypeO;
@@ -19738,14 +19719,14 @@
 
 	    // status [close, lock, unlock]
 
-	    var _this2 = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(App)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(App)).call.apply(_Object$getPrototypeO, [this].concat(args)));
 
-	    _this2.state = {
+	    _this.state = {
 	      status: 'close',
 	      leaveTime: 0,
 	      leaveInterval: null
 	    };
-	    return _this2;
+	    return _this;
 	  }
 
 	  _createClass(App, [{
@@ -19755,6 +19736,9 @@
 	      if (this.state.status == 'close') {
 	        // 开启屏幕
 	        this.openScreen();
+	      } else if (this.state.status == 'lock') {
+	        // 移到主屏幕
+	        this.refs.lockScreen.changeToMain();
 	      }
 	    }
 	  }, {
@@ -19782,23 +19766,23 @@
 	        status: 'close',
 	        leaveTime: 0
 	      });
-	      this.refs.mask.close();
+	      this.refs.mask.close(this.refs.lockScreen.changeToMain.bind(this.refs.lockScreen));
 	    }
 	  }, {
 	    key: 'prepareClose',
 	    value: function prepareClose() {
-	      var _this3 = this;
+	      var _this2 = this;
 
 	      if (this.state.status != 'close') {
 	        this.state.leaveInterval = setInterval(function () {
-	          console.log('leave...' + _this3.state.leaveTime);
-	          _this3.setState({
-	            leaveTime: _this3.state.leaveTime + 1
+	          console.log('leave...' + _this2.state.leaveTime);
+	          _this2.setState({
+	            leaveTime: _this2.state.leaveTime + 1
 	          });
-	          if (_this3.state.leaveTime == CLOSE_TIME - 5) {
-	            _this3.refs.mask.prepareClose();
-	          } else if (_this3.state.leaveTime == CLOSE_TIME) {
-	            _this3.closeScreen();
+	          if (_this2.state.leaveTime == CLOSE_TIME - 5) {
+	            _this2.refs.mask.prepareClose();
+	          } else if (_this2.state.leaveTime == CLOSE_TIME) {
+	            _this2.closeScreen();
 	          }
 	        }, 1000);
 	      }
@@ -19819,8 +19803,8 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: _App2.default.screen, onMouseUp: this.prepareClose.bind(this), onMouseMove: this.handleMouseMove.bind(this), onMouseLeave: this.prepareClose.bind(this) },
-	          _react2.default.createElement(Desktop, null),
-	          _react2.default.createElement(_LockScreen2.default, null),
+	          _react2.default.createElement(_Desktop2.default, null),
+	          _react2.default.createElement(_LockScreen2.default, { ref: 'lockScreen' }),
 	          _react2.default.createElement(_Mask2.default, { ref: 'mask' })
 	        ),
 	        _react2.default.createElement('a', { className: _App2.default.home, onMouseDown: this.handleHome.bind(this), onMouseUp: this.prepareClose.bind(this) })
@@ -19868,7 +19852,7 @@
 
 
 	// module
-	exports.push([module.id, "._1MXGw0vo01QToWO3V63Ym0 {\n  margin: 10px auto;\n  background: #F2F3F5;\n  width: 346px;\n  height: 722px;\n  position: relative;\n  border-radius: 50px;\n  border-style: solid;\n  border-color: #c0c0c0;\n  border-top-width: 2px;\n  border-left-width: 5px;\n  border-bottom-width: 2px;\n  border-right-width: 5px;\n}\n\n._366WPQ-tTsJ8HCDdl7Na89 {\n  position: absolute;\n  top: 15px;\n  left: 50%;\n  width: 110px;\n  height: 40px;\n  transform: translate(-50%, 0);\n}\n\n._2f2Mx5k4-pzsL0ckkvDMq_ {\n  width: 10px;\n  height: 10px;\n  border-radius: 50%;\n  background: #000000;\n  margin: 0 auto;\n}\n\n._2JlxJcW6DOeMiFvXgEhTic {\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  position: absolute;\n  background: #000000;\n  left: 0;\n  top: 17px;\n}\n\n._2VxocHUIewDj3C55_frEes {\n  width: 50px;\n  height: 6px;\n  border-radius: 6px;\n  background: #000000;\n  margin: 10px auto;\n}\n\n._3yAfwqwiCtGZQnsExrB5SD {\n  position: absolute;\n  top: 80px;\n  left: 15px;\n  width: 316px;\n  height: 562px;\n  overflow: hidden;\n}\n\n._2lfvYvOo5zLSPdmxjPbLzi {\n  display: inline-block;\n  position: absolute;\n  bottom: 15px;\n  left: 50%;\n  width: 55px;\n  height: 55px;\n  border-radius: 50%;\n  border: 3px #c0c0c0 solid;\n  box-sizing: border-box;\n  transform: translate(-50%, 0);\n  cursor: pointer;\n}\n\n._2lfvYvOo5zLSPdmxjPbLzi:active {\n  background: #E2E4E9;\n}\n", ""]);
+	exports.push([module.id, "._1MXGw0vo01QToWO3V63Ym0 {\r\n  margin: 10px auto;\r\n  background: #F2F3F5;\r\n  width: 346px;\r\n  height: 722px;\r\n  position: relative;\r\n  border-radius: 50px;\r\n  border-style: solid;\r\n  border-color: #c0c0c0;\r\n  border-top-width: 2px;\r\n  border-left-width: 5px;\r\n  border-bottom-width: 2px;\r\n  border-right-width: 5px;\r\n}\r\n\r\n._366WPQ-tTsJ8HCDdl7Na89 {\r\n  position: absolute;\r\n  top: 15px;\r\n  left: 50%;\r\n  width: 110px;\r\n  height: 40px;\r\n  transform: translate(-50%, 0);\r\n}\r\n\r\n._2f2Mx5k4-pzsL0ckkvDMq_ {\r\n  width: 10px;\r\n  height: 10px;\r\n  border-radius: 50%;\r\n  background: #000000;\r\n  margin: 0 auto;\r\n}\r\n\r\n._2JlxJcW6DOeMiFvXgEhTic {\r\n  width: 12px;\r\n  height: 12px;\r\n  border-radius: 50%;\r\n  position: absolute;\r\n  background: #000000;\r\n  left: 0;\r\n  top: 17px;\r\n}\r\n\r\n._2VxocHUIewDj3C55_frEes {\r\n  width: 50px;\r\n  height: 6px;\r\n  border-radius: 6px;\r\n  background: #000000;\r\n  margin: 10px auto;\r\n}\r\n\r\n._3yAfwqwiCtGZQnsExrB5SD {\r\n  position: absolute;\r\n  top: 80px;\r\n  left: 15px;\r\n  width: 316px;\r\n  height: 562px;\r\n  overflow: hidden;\r\n}\r\n\r\n._2lfvYvOo5zLSPdmxjPbLzi {\r\n  display: inline-block;\r\n  position: absolute;\r\n  bottom: 15px;\r\n  left: 50%;\r\n  width: 55px;\r\n  height: 55px;\r\n  border-radius: 50%;\r\n  border: 3px #c0c0c0 solid;\r\n  box-sizing: border-box;\r\n  transform: translate(-50%, 0);\r\n  cursor: pointer;\r\n}\r\n\r\n._2lfvYvOo5zLSPdmxjPbLzi:active {\r\n  background: #E2E4E9;\r\n}\r\n", ""]);
 
 	// exports
 	exports.locals = {
@@ -20249,7 +20233,7 @@
 	    }
 	  }, {
 	    key: 'close',
-	    value: function close() {
+	    value: function close(callback) {
 	      var _this3 = this;
 
 	      this.setState({
@@ -20257,6 +20241,7 @@
 	      });
 	      setTimeout(function () {
 	        _this3.refs.mask.style.display = 'block';
+	        callback && callback();
 	      }, 500);
 	    }
 	  }, {
@@ -20321,23 +20306,147 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var SCREEN_WIDTH = 346;
+
 	var LockScreen = function (_React$Component) {
 	  _inherits(LockScreen, _React$Component);
 
 	  function LockScreen() {
+	    var _Object$getPrototypeO;
+
 	    _classCallCheck(this, LockScreen);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(LockScreen).apply(this, arguments));
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(LockScreen)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+
+	    _this.state = {
+	      isDrag: false,
+	      position: -50,
+	      curPage: 'main'
+	    };
+	    return _this;
 	  }
 
 	  _createClass(LockScreen, [{
+	    key: 'handleMouseDown',
+	    value: function handleMouseDown(e) {
+	      this.setState({
+	        isDrag: true,
+	        startX: e.pageX
+	      });
+	    }
+	  }, {
+	    key: 'changeToMain',
+	    value: function changeToMain() {
+	      this.setState({
+	        isDrag: false,
+	        position: -50,
+	        curPage: 'main'
+	      });
+	    }
+	  }, {
+	    key: 'changeToPassword',
+	    value: function changeToPassword() {
+	      this.setState({
+	        isDrag: false,
+	        position: 0,
+	        curPage: 'password'
+	      });
+	    }
+	  }, {
+	    key: 'handleMouseUp',
+	    value: function handleMouseUp(e) {
+	      switch (this.state.curPage) {
+	        case 'main':
+	          if (this.state.position > -36) {
+	            this.changeToPassword();
+	          } else {
+	            this.changeToMain();
+	          }
+	          break;
+	        case 'password':
+	          if (this.state.position < -20) {
+	            this.changeToMain();
+	          } else {
+	            this.changeToPassword();
+	          }
+	      }
+	    }
+	  }, {
+	    key: 'handleMouseMove',
+	    value: function handleMouseMove(e) {
+	      if (this.state.isDrag) {
+	        var curX = e.pageX;
+	        var moveDis = curX - this.state.startX;
+	        // 左滑为 - 右滑为 +
+	        var transDis = moveDis * 50 / SCREEN_WIDTH;
+	        if (this.state.curPage == 'main') {
+	          if (transDis < 0) {
+	            transDis /= 2;
+	          }
+	          this.setState({
+	            position: -50 + transDis
+	          });
+	        } else if (this.state.curPage == 'password') {
+	          if (transDis > 0) {
+	            transDis /= 2;
+	          }
+	          this.setState({
+	            position: transDis
+	          });
+	        }
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var styleObj = {
+	        transform: 'translate(' + this.state.position + '%, 0)',
+	        background: 'rgba(0, 0, 0, ' + (this.state.position * 0.01 + 0.5) + ')',
+	        transition: this.state.isDrag ? '' : '0.5s'
+	      };
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: _LockScreen2.default.lockScreen, onMouseDown: this.handleMouseDown.bind(this),
+	          onMouseMove: this.handleMouseMove.bind(this), onMouseUp: this.handleMouseUp.bind(this),
+	          onMouseLeave: this.handleMouseUp.bind(this) },
 	        _react2.default.createElement('div', { className: _LockScreen2.default.bgWrap }),
-	        _react2.default.createElement('div', { className: _LockScreen2.default.lockWrap })
+	        _react2.default.createElement(
+	          'div',
+	          { className: _LockScreen2.default.lockWrap, style: styleObj },
+	          _react2.default.createElement('div', { className: _LockScreen2.default.pwdWrap + " wrap" }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: _LockScreen2.default.mai + " wrap" },
+	            _react2.default.createElement(
+	              'div',
+	              { className: _LockScreen2.default.timeWrap },
+	              _react2.default.createElement(
+	                'span',
+	                null,
+	                '22:34'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: _LockScreen2.default.dateWrap },
+	              _react2.default.createElement(
+	                'span',
+	                null,
+	                '3月3日'
+	              ),
+	              ' ',
+	              _react2.default.createElement(
+	                'span',
+	                null,
+	                '星期四'
+	              )
+	            )
+	          )
+	        )
 	      );
 	    }
 	  }]);
@@ -20382,18 +20491,117 @@
 
 
 	// module
-	exports.push([module.id, "._1X3Z75GPyyk6dSuoaYE8tq {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background: url(" + __webpack_require__(168) + ") center center fixed;\n}", ""]);
+	exports.push([module.id, "._1YLmlsXif1BfHwc0Fc-BrZ {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n}\r\n\r\n._1X3Z75GPyyk6dSuoaYE8tq {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background: url(" + __webpack_require__(168) + ") no-repeat center top fixed;\r\n  background-size: 410px;\r\n}\r\n\r\n._1Al12whghNSNbxeCIMbGMA {\r\n  width: 200%;\r\n  height: 100%;\r\n}\r\n\r\n._1Al12whghNSNbxeCIMbGMA .wrap{\r\n  float: left;\r\n  width: 50%;\r\n  height: 100%;\r\n}\r\n\r\n._35BvdxthKI6tTMfOisFhu4 {\r\n  \r\n}\r\n\r\n._3-XMBlsA2JbpWwG1Y46R6e {\r\n  color: #000000;\r\n}\r\n\r\n\r\n._2nXxDq-AbjDrdy984EQvwl {\r\n  margin-top: 50px;\r\n  font-size: 78px;\r\n  text-align: center;\r\n}\r\n\r\n._3N5q0w0yVI9JmxTiofTT4A {\r\n  font-size: 15px;\r\n  text-align: center;\r\n  margin-top: -7px;\r\n}", ""]);
 
 	// exports
 	exports.locals = {
-		"bgWrap": "_1X3Z75GPyyk6dSuoaYE8tq"
+		"lockScreen": "_1YLmlsXif1BfHwc0Fc-BrZ",
+		"bgWrap": "_1X3Z75GPyyk6dSuoaYE8tq",
+		"lockWrap": "_1Al12whghNSNbxeCIMbGMA",
+		"pwdWrap": "_35BvdxthKI6tTMfOisFhu4",
+		"main": "_3-XMBlsA2JbpWwG1Y46R6e",
+		"timeWrap": "_2nXxDq-AbjDrdy984EQvwl",
+		"dateWrap": "_3N5q0w0yVI9JmxTiofTT4A"
 	};
 
 /***/ },
 /* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "/lock.jpg";
+	module.exports = __webpack_require__.p + "11ef2737357ca07ea8dea40c4115a08c.jpg";
+
+/***/ },
+/* 169 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Desktop = __webpack_require__(170);
+
+	var _Desktop2 = _interopRequireDefault(_Desktop);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Desktop = function (_React$Component) {
+	  _inherits(Desktop, _React$Component);
+
+	  function Desktop() {
+	    _classCallCheck(this, Desktop);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Desktop).apply(this, arguments));
+	  }
+
+	  _createClass(Desktop, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        'Desktop'
+	      );
+	    }
+	  }]);
+
+	  return Desktop;
+	}(_react2.default.Component);
+
+	exports.default = Desktop;
+
+/***/ },
+/* 170 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(171);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(163)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./Desktop.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./Desktop.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 171 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(162)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);

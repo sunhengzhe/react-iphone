@@ -1,8 +1,49 @@
+:local .lockScreen {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 :local .bgWrap {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background: url(./images/lock.jpg) center center fixed;
+  background: url(./images/lock.jpg) no-repeat center top fixed;
+  background-size: 410px;
+}
+
+:local .lockWrap {
+  width: 200%;
+  height: 100%;
+}
+
+:local .lockWrap :global .wrap{
+  float: left;
+  width: 50%;
+  height: 100%;
+}
+
+:local .pwdWrap {
+  
+}
+
+:local .main {
+  color: #000000;
+}
+
+
+:local .timeWrap {
+  margin-top: 50px;
+  font-size: 78px;
+  text-align: center;
+}
+
+:local .dateWrap {
+  font-size: 15px;
+  text-align: center;
+  margin-top: -7px;
 }
