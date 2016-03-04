@@ -1,49 +1,146 @@
-:local .lockScreen {
+.lockScreen {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  cursor: default;
 }
 
-:local .bgWrap {
+.bgWrap {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background: url(./images/lock.jpg) no-repeat center top fixed;
-  background-size: 410px;
+  background: url(./images/lock.jpg) no-repeat center center fixed;
+  transition: 0.5s;
 }
 
-:local .lockWrap {
-  width: 200%;
+.lockWrap {
+  width: 400%;
   height: 100%;
 }
 
-:local .lockWrap :global .wrap{
+.lockWrap :global .wrap{
   float: left;
-  width: 50%;
+  width: 25%;
   height: 100%;
 }
 
-:local .pwdWrap {
-  
+.pwdWrap {
+  color: #ffffff;
+  position: relative;
 }
 
-:local .main {
+.info {
+  font-size: 16px;
+  text-align: center;
+  margin-top: 83px;
+  font-weight: 300;
+}
+
+.circleBox {
+  margin: 15px auto;
+  text-align: center;
+  animation-delay: 0.5s;
+  -webkit-animation-delay: 0.5s;
+  -moz-animation-delay: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-duration: 0.5s;
+  -moz-animation-duration: 0.5s;
+}
+
+.circleBox :global .circle {
+  display: inline-block;
+  margin: 0 11px;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  border: 1px #ffffff solid;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+}
+
+.keyboard {
+  margin: 35px auto;
+  width: 264px;
+}
+
+.key {
+  float: left;
+  margin: 6px 12px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  border: 2px #ffffff solid;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+}
+
+.key:active{
+  background: #ffffff;
+  transition: 0.1s;
+  -webkit-transition: 0.1s;
+  -moz-transition: 0.1s;
+}
+
+.key :global .num{
+  font-size: 26px;
+  padding-top: 10px;
+}
+
+.key :global .en{
+  font-size: 8px;
+}
+
+.key:last-child{
+  margin-left: 100px;
+}
+
+.key:last-child :global .num{
+  padding-top: 15px;
+}
+
+.main {
   color: #000000;
 }
 
 
-:local .timeWrap {
+.timeWrap {
   margin-top: 50px;
   font-size: 78px;
   text-align: center;
 }
 
-:local .dateWrap {
+.dateWrap {
   font-size: 15px;
   text-align: center;
   margin-top: -7px;
+}
+
+.urgency, .cancel {
+  position: absolute;
+  display: inline-block;
+  font-size: 12px;
+  bottom: 30px;
+  width: 60px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.urgency:active, .cancel:active {
+  opacity: 0.5;
+}
+
+.urgency {
+  left: 36px;
+}
+
+.cancel {
+  right: 36px;
 }

@@ -1,4 +1,4 @@
-:local .phone {
+.phone {
   margin: 10px auto;
   background: #F2F3F5;
   width: 346px;
@@ -13,7 +13,7 @@
   border-right-width: 5px;
 }
 
-:local .tool {
+.tool {
   position: absolute;
   top: 15px;
   left: 50%;
@@ -22,7 +22,7 @@
   transform: translate(-50%, 0);
 }
 
-:local .ccd {
+.ccd {
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -30,7 +30,7 @@
   margin: 0 auto;
 }
 
-:local .camera {
+.camera {
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -40,7 +40,7 @@
   top: 17px;
 }
 
-:local .receiver {
+.receiver {
   width: 50px;
   height: 6px;
   border-radius: 6px;
@@ -48,7 +48,7 @@
   margin: 10px auto;
 }
 
-:local .screen {
+.screen {
   position: absolute;
   top: 80px;
   left: 15px;
@@ -57,7 +57,7 @@
   overflow: hidden;
 }
 
-:local .home {
+.home {
   display: inline-block;
   position: absolute;
   bottom: 15px;
@@ -71,6 +71,6 @@
   cursor: pointer;
 }
 
-:local .home:active {
+.home:active {
   background: #E2E4E9;
 }

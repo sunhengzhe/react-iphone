@@ -2,14 +2,14 @@ var path = require('path');
 module.exports = {
   entry: "./js/app.js",
   output: {
-    path: __dirname, 
+    path: __dirname,
     filename: "/js/bundle.js"
   },
   module: {
     loaders: [
       {
         test: /\.css$/,
-        loader: 'style!css'
+        loader: 'style!css?modules'
       },
       {
         test: /\.(png|jpg)$/,

@@ -18,6 +18,10 @@ class App extends React.Component {
     }
   }
 
+  /**
+   * home 键按钮
+   * @return {[type]} [description]
+   */
   handleHome() {
     this.openScreen();
     if(this.state.status == 'close') {
@@ -35,6 +39,10 @@ class App extends React.Component {
     }
   }
 
+ /**
+ * 开启屏幕
+ * @return {[type]} [description]
+ */
   openScreen() {
     clearInterval(this.state.leaveInterval);
     this.setState({
@@ -42,8 +50,13 @@ class App extends React.Component {
       leaveTime: 0
     })
     this.refs.mask.open();
+    this.refs.lockScreen.open();
   }
 
+  /**
+   * 关闭屏幕
+   * @return {[type]} [description]
+   */
   closeScreen() {
     clearInterval(this.state.leaveInterval);
     this.setState({
@@ -51,8 +64,13 @@ class App extends React.Component {
       leaveTime: 0
     });
     this.refs.mask.close(this.refs.lockScreen.changeToMain.bind(this.refs.lockScreen));
+    this.refs.lockScreen.close();
   }
 
+  /**
+   * 准备休眠
+   * @return {[type]} [description]
+   */
   prepareClose() {
     if(this.state.status != 'close') {
       this.state.leaveInterval = setInterval(() => {

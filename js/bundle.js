@@ -19729,6 +19729,12 @@
 	    return _this;
 	  }
 
+	  /**
+	   * home 键按钮
+	   * @return {[type]} [description]
+	   */
+
+
 	  _createClass(App, [{
 	    key: 'handleHome',
 	    value: function handleHome() {
@@ -19748,6 +19754,12 @@
 	        this.openScreen();
 	      }
 	    }
+
+	    /**
+	    * 开启屏幕
+	    * @return {[type]} [description]
+	    */
+
 	  }, {
 	    key: 'openScreen',
 	    value: function openScreen() {
@@ -19757,7 +19769,14 @@
 	        leaveTime: 0
 	      });
 	      this.refs.mask.open();
+	      this.refs.lockScreen.open();
 	    }
+
+	    /**
+	     * 关闭屏幕
+	     * @return {[type]} [description]
+	     */
+
 	  }, {
 	    key: 'closeScreen',
 	    value: function closeScreen() {
@@ -19767,7 +19786,14 @@
 	        leaveTime: 0
 	      });
 	      this.refs.mask.close(this.refs.lockScreen.changeToMain.bind(this.refs.lockScreen));
+	      this.refs.lockScreen.close();
 	    }
+
+	    /**
+	     * 准备休眠
+	     * @return {[type]} [description]
+	     */
+
 	  }, {
 	    key: 'prepareClose',
 	    value: function prepareClose() {
@@ -19833,8 +19859,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./App.css", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./App.css");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js?modules!./App.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js?modules!./App.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -19852,7 +19878,7 @@
 
 
 	// module
-	exports.push([module.id, "._1MXGw0vo01QToWO3V63Ym0 {\r\n  margin: 10px auto;\r\n  background: #F2F3F5;\r\n  width: 346px;\r\n  height: 722px;\r\n  position: relative;\r\n  border-radius: 50px;\r\n  border-style: solid;\r\n  border-color: #c0c0c0;\r\n  border-top-width: 2px;\r\n  border-left-width: 5px;\r\n  border-bottom-width: 2px;\r\n  border-right-width: 5px;\r\n}\r\n\r\n._366WPQ-tTsJ8HCDdl7Na89 {\r\n  position: absolute;\r\n  top: 15px;\r\n  left: 50%;\r\n  width: 110px;\r\n  height: 40px;\r\n  transform: translate(-50%, 0);\r\n}\r\n\r\n._2f2Mx5k4-pzsL0ckkvDMq_ {\r\n  width: 10px;\r\n  height: 10px;\r\n  border-radius: 50%;\r\n  background: #000000;\r\n  margin: 0 auto;\r\n}\r\n\r\n._2JlxJcW6DOeMiFvXgEhTic {\r\n  width: 12px;\r\n  height: 12px;\r\n  border-radius: 50%;\r\n  position: absolute;\r\n  background: #000000;\r\n  left: 0;\r\n  top: 17px;\r\n}\r\n\r\n._2VxocHUIewDj3C55_frEes {\r\n  width: 50px;\r\n  height: 6px;\r\n  border-radius: 6px;\r\n  background: #000000;\r\n  margin: 10px auto;\r\n}\r\n\r\n._3yAfwqwiCtGZQnsExrB5SD {\r\n  position: absolute;\r\n  top: 80px;\r\n  left: 15px;\r\n  width: 316px;\r\n  height: 562px;\r\n  overflow: hidden;\r\n}\r\n\r\n._2lfvYvOo5zLSPdmxjPbLzi {\r\n  display: inline-block;\r\n  position: absolute;\r\n  bottom: 15px;\r\n  left: 50%;\r\n  width: 55px;\r\n  height: 55px;\r\n  border-radius: 50%;\r\n  border: 3px #c0c0c0 solid;\r\n  box-sizing: border-box;\r\n  transform: translate(-50%, 0);\r\n  cursor: pointer;\r\n}\r\n\r\n._2lfvYvOo5zLSPdmxjPbLzi:active {\r\n  background: #E2E4E9;\r\n}\r\n", ""]);
+	exports.push([module.id, "._1MXGw0vo01QToWO3V63Ym0 {\n  margin: 10px auto;\n  background: #F2F3F5;\n  width: 346px;\n  height: 722px;\n  position: relative;\n  border-radius: 50px;\n  border-style: solid;\n  border-color: #c0c0c0;\n  border-top-width: 2px;\n  border-left-width: 5px;\n  border-bottom-width: 2px;\n  border-right-width: 5px;\n}\n\n._366WPQ-tTsJ8HCDdl7Na89 {\n  position: absolute;\n  top: 15px;\n  left: 50%;\n  width: 110px;\n  height: 40px;\n  transform: translate(-50%, 0);\n}\n\n._2f2Mx5k4-pzsL0ckkvDMq_ {\n  width: 10px;\n  height: 10px;\n  border-radius: 50%;\n  background: #000000;\n  margin: 0 auto;\n}\n\n._2JlxJcW6DOeMiFvXgEhTic {\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  position: absolute;\n  background: #000000;\n  left: 0;\n  top: 17px;\n}\n\n._2VxocHUIewDj3C55_frEes {\n  width: 50px;\n  height: 6px;\n  border-radius: 6px;\n  background: #000000;\n  margin: 10px auto;\n}\n\n._3yAfwqwiCtGZQnsExrB5SD {\n  position: absolute;\n  top: 80px;\n  left: 15px;\n  width: 316px;\n  height: 562px;\n  overflow: hidden;\n}\n\n._2lfvYvOo5zLSPdmxjPbLzi {\n  display: inline-block;\n  position: absolute;\n  bottom: 15px;\n  left: 50%;\n  width: 55px;\n  height: 55px;\n  border-radius: 50%;\n  border: 3px #c0c0c0 solid;\n  box-sizing: border-box;\n  transform: translate(-50%, 0);\n  cursor: pointer;\n}\n\n._2lfvYvOo5zLSPdmxjPbLzi:active {\n  background: #E2E4E9;\n}\n", ""]);
 
 	// exports
 	exports.locals = {
@@ -20307,6 +20333,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var SCREEN_WIDTH = 346;
+	var PASSWORD = '0218';
 
 	var LockScreen = function (_React$Component) {
 	  _inherits(LockScreen, _React$Component);
@@ -20325,10 +20352,18 @@
 	    _this.state = {
 	      isDrag: false,
 	      position: -50,
-	      curPage: 'main'
+	      curPage: 'main',
+	      bgWidth: SCREEN_WIDTH,
+	      password: ''
 	    };
+	    _this.keyTexts = [{ num: '1', en: '' }, { num: '2', en: 'A B C' }, { num: '3', en: 'D E F' }, { num: '4', en: 'G H I' }, { num: '5', en: 'J K L' }, { num: '6', en: 'M N O' }, { num: '7', en: 'P Q R S' }, { num: '8', en: 'T U V' }, { num: '9', en: 'W X Y Z' }, { num: '0', en: '' }];
 	    return _this;
 	  }
+
+	  /**
+	   * 锁屏中按下手指
+	   */
+
 
 	  _createClass(LockScreen, [{
 	    key: 'handleMouseDown',
@@ -20338,51 +20373,74 @@
 	        startX: e.pageX
 	      });
 	    }
+
+	    /**
+	     * 锁屏切换到主屏幕
+	     */
+
 	  }, {
 	    key: 'changeToMain',
 	    value: function changeToMain() {
 	      this.setState({
 	        isDrag: false,
 	        position: -50,
-	        curPage: 'main'
+	        curPage: 'main',
+	        password: ''
 	      });
 	    }
+
+	    /**
+	     * 锁屏切换到密码屏幕
+	     */
+
 	  }, {
 	    key: 'changeToPassword',
 	    value: function changeToPassword() {
 	      this.setState({
 	        isDrag: false,
-	        position: 0,
+	        position: -25,
 	        curPage: 'password'
 	      });
 	    }
+
+	    /**
+	     * 手指离开屏幕
+	     */
+
 	  }, {
 	    key: 'handleMouseUp',
 	    value: function handleMouseUp(e) {
 	      switch (this.state.curPage) {
 	        case 'main':
-	          if (this.state.position > -36) {
+	          // 判断是否需要切换屏幕
+	          if (this.state.position > -42) {
 	            this.changeToPassword();
 	          } else {
 	            this.changeToMain();
 	          }
 	          break;
 	        case 'password':
-	          if (this.state.position < -20) {
+	          if (this.state.position < -38) {
 	            this.changeToMain();
 	          } else {
 	            this.changeToPassword();
 	          }
 	      }
 	    }
+
+	    /**
+	     * 手指移动
+	     */
+
 	  }, {
 	    key: 'handleMouseMove',
 	    value: function handleMouseMove(e) {
 	      if (this.state.isDrag) {
 	        var curX = e.pageX;
-	        var moveDis = curX - this.state.startX;
 	        // 左滑为 - 右滑为 +
-	        var transDis = moveDis * 50 / SCREEN_WIDTH;
+	        var moveDis = curX - this.state.startX;
+	        // 移动的百分比数
+	        var transDis = moveDis * 25 / SCREEN_WIDTH;
 	        if (this.state.curPage == 'main') {
 	          if (transDis < 0) {
 	            transDis /= 2;
@@ -20395,32 +20453,162 @@
 	            transDis /= 2;
 	          }
 	          this.setState({
-	            position: transDis
+	            position: -25 + transDis
 	          });
 	        }
 	      }
 	    }
+
+	    /**
+	     * 输入密码
+	     */
+
+	  }, {
+	    key: 'enterPassword',
+	    value: function enterPassword(num) {
+	      var _this2 = this;
+
+	      this.setState({
+	        password: this.state.password + num
+	      }, function () {
+	        if (_this2.state.password.length == 4) {
+	          // 检查密码
+	          if (_this2.state.password == PASSWORD) {
+	            // 解除锁屏
+	          } else {
+	              // 密码错误
+	              var curClass = _this2.refs.circleBox.getAttribute('class');
+	              _this2.refs.circleBox.setAttribute('class', curClass + ' shake animated');
+	              setTimeout(function () {
+	                _this2.refs.circleBox.setAttribute('class', curClass);
+	                _this2.setState({
+	                  password: ''
+	                });
+	              }, 1000);
+	            }
+	        }
+	      });
+	    }
+
+	    /**
+	     * 屏幕打开
+	     */
+
+	  }, {
+	    key: 'open',
+	    value: function open() {
+	      this.setState({
+	        bgWidth: SCREEN_WIDTH * 1.1
+	      });
+	    }
+
+	    /**
+	     * 屏幕关闭
+	     */
+
+	  }, {
+	    key: 'close',
+	    value: function close() {
+	      this.setState({
+	        bgWidth: SCREEN_WIDTH
+	      });
+	    }
+
+	    /**
+	     * 删除上一位密码
+	     */
+
+	  }, {
+	    key: 'cancel',
+	    value: function cancel() {
+	      this.setState({
+	        password: this.state.password.slice(0, -1)
+	      });
+	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var styleObj = {
+	      var _this3 = this;
+
+	      var bgOpacity = this.state.position * 0.02 + 1;
+	      var lockStyle = {
 	        transform: 'translate(' + this.state.position + '%, 0)',
-	        background: 'rgba(0, 0, 0, ' + (this.state.position * 0.01 + 0.5) + ')',
+	        background: 'rgba(0, 0, 0, ' + bgOpacity + ')',
 	        transition: this.state.isDrag ? '' : '0.5s'
 	      };
+
+	      var bgStyle = {
+	        backgroundSize: this.state.bgWidth
+	      };
+
 	      return _react2.default.createElement(
 	        'div',
 	        { className: _LockScreen2.default.lockScreen, onMouseDown: this.handleMouseDown.bind(this),
 	          onMouseMove: this.handleMouseMove.bind(this), onMouseUp: this.handleMouseUp.bind(this),
 	          onMouseLeave: this.handleMouseUp.bind(this) },
-	        _react2.default.createElement('div', { className: _LockScreen2.default.bgWrap }),
+	        _react2.default.createElement('div', { className: _LockScreen2.default.bgWrap, style: bgStyle }),
 	        _react2.default.createElement(
 	          'div',
-	          { className: _LockScreen2.default.lockWrap, style: styleObj },
-	          _react2.default.createElement('div', { className: _LockScreen2.default.pwdWrap + " wrap" }),
+	          { className: _LockScreen2.default.lockWrap, style: lockStyle },
+	          _react2.default.createElement('div', { className: 'wrap' }),
 	          _react2.default.createElement(
 	            'div',
-	            { className: _LockScreen2.default.mai + " wrap" },
+	            { className: _LockScreen2.default.pwdWrap + " wrap" },
+	            _react2.default.createElement(
+	              'div',
+	              { className: _LockScreen2.default.info },
+	              'Touch ID 或输入密码'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: _LockScreen2.default.circleBox, ref: 'circleBox' },
+	              _react2.default.createElement('a', { className: 'circle', style: { background: this.state.password.length > 0 ? '#fff' : '' } }),
+	              _react2.default.createElement('a', { className: 'circle', style: { background: this.state.password.length > 1 ? '#fff' : '' } }),
+	              _react2.default.createElement('a', { className: 'circle', style: { background: this.state.password.length > 2 ? '#fff' : '' } }),
+	              _react2.default.createElement('a', { className: 'circle', style: { background: this.state.password.length > 3 ? '#fff' : '' } })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: _LockScreen2.default.keyboard },
+	              this.keyTexts.map(function (item) {
+	                return _react2.default.createElement(
+	                  'div',
+	                  { key: item.num, className: _LockScreen2.default.key, onClick: _this3.enterPassword.bind(_this3, item.num) },
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'num' },
+	                    _react2.default.createElement(
+	                      'span',
+	                      null,
+	                      item.num
+	                    )
+	                  ),
+	                  _react2.default.createElement(
+	                    'div',
+	                    { className: 'en' },
+	                    _react2.default.createElement(
+	                      'span',
+	                      null,
+	                      item.en
+	                    )
+	                  )
+	                );
+	              })
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { className: _LockScreen2.default.urgency },
+	              '紧急情况'
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { className: _LockScreen2.default.cancel, onClick: this.cancel.bind(this) },
+	              '删除'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: _LockScreen2.default.main + " wrap" },
 	            _react2.default.createElement(
 	              'div',
 	              { className: _LockScreen2.default.timeWrap },
@@ -20445,7 +20633,8 @@
 	                '星期四'
 	              )
 	            )
-	          )
+	          ),
+	          _react2.default.createElement('div', { className: 'wrap' })
 	        )
 	      );
 	    }
@@ -20472,8 +20661,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./LockScreen.css", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./LockScreen.css");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js?modules!./LockScreen.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js?modules!./LockScreen.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -20491,7 +20680,7 @@
 
 
 	// module
-	exports.push([module.id, "._1YLmlsXif1BfHwc0Fc-BrZ {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n}\r\n\r\n._1X3Z75GPyyk6dSuoaYE8tq {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background: url(" + __webpack_require__(168) + ") no-repeat center top fixed;\r\n  background-size: 410px;\r\n}\r\n\r\n._1Al12whghNSNbxeCIMbGMA {\r\n  width: 200%;\r\n  height: 100%;\r\n}\r\n\r\n._1Al12whghNSNbxeCIMbGMA .wrap{\r\n  float: left;\r\n  width: 50%;\r\n  height: 100%;\r\n}\r\n\r\n._35BvdxthKI6tTMfOisFhu4 {\r\n  \r\n}\r\n\r\n._3-XMBlsA2JbpWwG1Y46R6e {\r\n  color: #000000;\r\n}\r\n\r\n\r\n._2nXxDq-AbjDrdy984EQvwl {\r\n  margin-top: 50px;\r\n  font-size: 78px;\r\n  text-align: center;\r\n}\r\n\r\n._3N5q0w0yVI9JmxTiofTT4A {\r\n  font-size: 15px;\r\n  text-align: center;\r\n  margin-top: -7px;\r\n}", ""]);
+	exports.push([module.id, "._1YLmlsXif1BfHwc0Fc-BrZ {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  cursor: default;\r\n}\r\n\r\n._1X3Z75GPyyk6dSuoaYE8tq {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background: url(" + __webpack_require__(168) + ") no-repeat center center fixed;\r\n  transition: 0.5s;\r\n}\r\n\r\n._1Al12whghNSNbxeCIMbGMA {\r\n  width: 400%;\r\n  height: 100%;\r\n}\r\n\r\n._1Al12whghNSNbxeCIMbGMA .wrap{\r\n  float: left;\r\n  width: 25%;\r\n  height: 100%;\r\n}\r\n\r\n._35BvdxthKI6tTMfOisFhu4 {\r\n  color: #ffffff;\r\n  position: relative;\r\n}\r\n\r\n.Xs2HSFx2OcBUIopsyZ9Uc {\r\n  font-size: 16px;\r\n  text-align: center;\r\n  margin-top: 83px;\r\n  font-weight: 300;\r\n}\r\n\r\n._1-B-hSrSfnhTjQWnLt5B0n {\r\n  margin: 15px auto;\r\n  text-align: center;\r\n  animation-delay: 0.5s;\r\n  -webkit-animation-delay: 0.5s;\r\n  -moz-animation-delay: 0.5s;\r\n  animation-duration: 0.5s;\r\n  -webkit-animation-duration: 0.5s;\r\n  -moz-animation-duration: 0.5s;\r\n}\r\n\r\n._1-B-hSrSfnhTjQWnLt5B0n .circle {\r\n  display: inline-block;\r\n  margin: 0 11px;\r\n  border-radius: 50%;\r\n  width: 8px;\r\n  height: 8px;\r\n  border: 1px #ffffff solid;\r\n  transition: 0.2s;\r\n  -webkit-transition: 0.2s;\r\n  -moz-transition: 0.2s;\r\n}\r\n\r\n._1kCk0P8sQRkt5SbseNeR60 {\r\n  margin: 35px auto;\r\n  width: 264px;\r\n}\r\n\r\n._2R7z3AmmPj7U2Ikznv5yuU {\r\n  float: left;\r\n  margin: 6px 12px;\r\n  border-radius: 50%;\r\n  width: 60px;\r\n  height: 60px;\r\n  border: 2px #ffffff solid;\r\n  text-align: center;\r\n  cursor: pointer;\r\n  transition: 0.5s;\r\n  -webkit-transition: 0.5s;\r\n  -moz-transition: 0.5s;\r\n}\r\n\r\n._2R7z3AmmPj7U2Ikznv5yuU:active{\r\n  background: #ffffff;\r\n  transition: 0.1s;\r\n  -webkit-transition: 0.1s;\r\n  -moz-transition: 0.1s;\r\n}\r\n\r\n._2R7z3AmmPj7U2Ikznv5yuU .num{\r\n  font-size: 26px;\r\n  padding-top: 10px;\r\n}\r\n\r\n._2R7z3AmmPj7U2Ikznv5yuU .en{\r\n  font-size: 8px;\r\n}\r\n\r\n._2R7z3AmmPj7U2Ikznv5yuU:last-child{\r\n  margin-left: 100px;\r\n}\r\n\r\n._2R7z3AmmPj7U2Ikznv5yuU:last-child .num{\r\n  padding-top: 15px;\r\n}\r\n\r\n._3-XMBlsA2JbpWwG1Y46R6e {\r\n  color: #000000;\r\n}\r\n\r\n\r\n._2nXxDq-AbjDrdy984EQvwl {\r\n  margin-top: 50px;\r\n  font-size: 78px;\r\n  text-align: center;\r\n}\r\n\r\n._3N5q0w0yVI9JmxTiofTT4A {\r\n  font-size: 15px;\r\n  text-align: center;\r\n  margin-top: -7px;\r\n}\r\n\r\n._3T5sMEjFPItWKLO-aRAwzF, .Vkid1QzRTyoLChr4vUZH {\r\n  position: absolute;\r\n  display: inline-block;\r\n  font-size: 12px;\r\n  bottom: 30px;\r\n  width: 60px;\r\n  text-align: center;\r\n  cursor: pointer;\r\n}\r\n\r\n._3T5sMEjFPItWKLO-aRAwzF:active, .Vkid1QzRTyoLChr4vUZH:active {\r\n  opacity: 0.5;\r\n}\r\n\r\n._3T5sMEjFPItWKLO-aRAwzF {\r\n  left: 36px;\r\n}\r\n\r\n.Vkid1QzRTyoLChr4vUZH {\r\n  right: 36px;\r\n}", ""]);
 
 	// exports
 	exports.locals = {
@@ -20499,9 +20688,15 @@
 		"bgWrap": "_1X3Z75GPyyk6dSuoaYE8tq",
 		"lockWrap": "_1Al12whghNSNbxeCIMbGMA",
 		"pwdWrap": "_35BvdxthKI6tTMfOisFhu4",
+		"info": "Xs2HSFx2OcBUIopsyZ9Uc",
+		"circleBox": "_1-B-hSrSfnhTjQWnLt5B0n",
+		"keyboard": "_1kCk0P8sQRkt5SbseNeR60",
+		"key": "_2R7z3AmmPj7U2Ikznv5yuU",
 		"main": "_3-XMBlsA2JbpWwG1Y46R6e",
 		"timeWrap": "_2nXxDq-AbjDrdy984EQvwl",
-		"dateWrap": "_3N5q0w0yVI9JmxTiofTT4A"
+		"dateWrap": "_3N5q0w0yVI9JmxTiofTT4A",
+		"urgency": "_3T5sMEjFPItWKLO-aRAwzF",
+		"cancel": "Vkid1QzRTyoLChr4vUZH"
 	};
 
 /***/ },
@@ -20579,8 +20774,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./Desktop.css", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./Desktop.css");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js?modules!./Desktop.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js?modules!./Desktop.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
