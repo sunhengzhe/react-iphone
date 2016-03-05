@@ -1,9 +1,11 @@
 var path = require('path');
+
 module.exports = {
-  entry: "./js/app.js",
+  entry: "./src/app.js",
   output: {
     path: __dirname,
-    filename: "/js/bundle.js"
+    filename: "build/js/bundle.js",
+    publicPath: __dirname
   },
   module: {
     loaders: [
@@ -13,7 +15,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpg)$/,
-        loader: 'url-loader?limit=8192'
+        loader: 'url-loader?limit=8192,name=/images/[hash].[ext]',
       },
       {
         test: /\.jsx?$/,

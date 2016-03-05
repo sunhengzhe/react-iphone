@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './LockScreen.css';
+import bgUrl from './images/lock.jpg';
 
 const SCREEN_WIDTH = 346;
 const PASSWORD = '0218';
@@ -26,7 +27,7 @@ class LockScreen extends React.Component {
       {num: '8', en: 'T U V'},
       {num: '9', en: 'W X Y Z'},
       {num: '0', en: ''}
-    ]
+    ];
   }
 
 /**
@@ -174,8 +175,10 @@ class LockScreen extends React.Component {
       transition: this.state.isDrag ? '' : '0.5s'
     }
 
+
     let bgStyle = {
-      backgroundSize: this.state.bgWidth
+      backgroundSize: this.state.bgWidth,
+      background: 'url("' + bgUrl + '") no-repeat center center fixed'
     }
 
     return (
