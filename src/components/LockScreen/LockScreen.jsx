@@ -177,8 +177,7 @@ class LockScreen extends React.Component {
 
 
     let bgStyle = {
-      backgroundSize: this.state.bgWidth,
-      background: 'url("' + bgUrl + '") no-repeat center center fixed'
+      backgroundSize: this.state.bgWidth
     }
 
     return (

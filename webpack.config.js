@@ -5,7 +5,7 @@ module.exports = {
   output: {
     path: __dirname,
     filename: "build/js/bundle.js",
-    publicPath: __dirname
+    publicPath: 'http://sunhengzhe.sinaapp.com/react-iphone'
   },
   module: {
     loaders: [
@@ -15,7 +15,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpg)$/,
-        loader: 'url-loader?limit=8192,name=/images/[hash].[ext]',
+        loader: 'url-loader?limit=8192,name=/build/images/[name].[ext]',
       },
       {
         test: /\.jsx?$/,

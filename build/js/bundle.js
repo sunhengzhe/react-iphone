@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "F:\\learning\\iphone";
+/******/ 	__webpack_require__.p = "http://sunhengzhe.sinaapp.com/react-iphone";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -20542,8 +20542,7 @@
 	      };
 
 	      var bgStyle = {
-	        backgroundSize: this.state.bgWidth,
-	        background: 'url("' + _lock2.default + '") no-repeat center center fixed'
+	        backgroundSize: this.state.bgWidth
 	      };
 
 	      return _react2.default.createElement(
@@ -20685,7 +20684,7 @@
 
 
 	// module
-	exports.push([module.id, ".z6a1p3RQCsL2VrriLbrT_ {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  cursor: default;\r\n}\r\n\r\n.TCwuw_QvwT4pCSFlC4lVE {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  transition: 0.5s;\r\n  -webkit-transition: 0.5s;\r\n  -moz-transition: 0.5s;\r\n}\r\n\r\n._1ADX0Op_B9W3jCLONO6Gy- {\r\n  width: 400%;\r\n  height: 100%;\r\n}\r\n\r\n._1ADX0Op_B9W3jCLONO6Gy- .wrap{\r\n  float: left;\r\n  width: 25%;\r\n  height: 100%;\r\n}\r\n\r\n.K7Ns_bnhTG7dPg9tenylf {\r\n  color: #ffffff;\r\n  position: relative;\r\n}\r\n\r\n._2v_O6eN6KOU9Fl9_pOc8y- {\r\n  font-size: 16px;\r\n  text-align: center;\r\n  margin-top: 83px;\r\n  font-weight: 300;\r\n}\r\n\r\n._2TIWZr_g5P3xLf4nxcJY5G {\r\n  margin: 15px auto;\r\n  text-align: center;\r\n  animation-delay: 0.5s;\r\n  -webkit-animation-delay: 0.5s;\r\n  -moz-animation-delay: 0.5s;\r\n  animation-duration: 0.5s;\r\n  -webkit-animation-duration: 0.5s;\r\n  -moz-animation-duration: 0.5s;\r\n}\r\n\r\n._2TIWZr_g5P3xLf4nxcJY5G .circle {\r\n  display: inline-block;\r\n  margin: 0 11px;\r\n  border-radius: 50%;\r\n  width: 8px;\r\n  height: 8px;\r\n  border: 1px #ffffff solid;\r\n  transition: 0.2s;\r\n  -webkit-transition: 0.2s;\r\n  -moz-transition: 0.2s;\r\n}\r\n\r\n.vQ46MDAyo9tGsSNAPSrR2 {\r\n  margin: 35px auto;\r\n  width: 264px;\r\n}\r\n\r\n.pcdLpqUPAM3Kn_T9zdQAN {\r\n  float: left;\r\n  margin: 6px 12px;\r\n  border-radius: 50%;\r\n  width: 60px;\r\n  height: 60px;\r\n  border: 2px #ffffff solid;\r\n  text-align: center;\r\n  cursor: pointer;\r\n  transition: 0.5s;\r\n  -webkit-transition: 0.5s;\r\n  -moz-transition: 0.5s;\r\n}\r\n\r\n.pcdLpqUPAM3Kn_T9zdQAN:active{\r\n  background: #ffffff;\r\n  transition: 0.1s;\r\n  -webkit-transition: 0.1s;\r\n  -moz-transition: 0.1s;\r\n}\r\n\r\n.pcdLpqUPAM3Kn_T9zdQAN .num{\r\n  font-size: 26px;\r\n  padding-top: 10px;\r\n}\r\n\r\n.pcdLpqUPAM3Kn_T9zdQAN .en{\r\n  font-size: 8px;\r\n}\r\n\r\n.pcdLpqUPAM3Kn_T9zdQAN:last-child{\r\n  margin-left: 100px;\r\n}\r\n\r\n.pcdLpqUPAM3Kn_T9zdQAN:last-child .num{\r\n  padding-top: 15px;\r\n}\r\n\r\n._1uJnbV2FlDKqDFFvGhJMZz {\r\n  color: #000000;\r\n}\r\n\r\n\r\n._2Jrm98oTdMWr5kMYI4U2-x {\r\n  margin-top: 50px;\r\n  font-size: 78px;\r\n  text-align: center;\r\n}\r\n\r\n._36-iPVwHJfeR1sqRFChRu- {\r\n  font-size: 15px;\r\n  text-align: center;\r\n  margin-top: -7px;\r\n}\r\n\r\n._3FFyNdcLuhdFQOuW41OIzo, ._2qPhcp4tTPPX12zhkN-wQU {\r\n  position: absolute;\r\n  display: inline-block;\r\n  font-size: 12px;\r\n  bottom: 30px;\r\n  width: 60px;\r\n  text-align: center;\r\n  cursor: pointer;\r\n}\r\n\r\n._3FFyNdcLuhdFQOuW41OIzo:active, ._2qPhcp4tTPPX12zhkN-wQU:active {\r\n  opacity: 0.5;\r\n}\r\n\r\n._3FFyNdcLuhdFQOuW41OIzo {\r\n  left: 36px;\r\n}\r\n\r\n._2qPhcp4tTPPX12zhkN-wQU {\r\n  right: 36px;\r\n}", ""]);
+	exports.push([module.id, ".z6a1p3RQCsL2VrriLbrT_ {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  cursor: default;\r\n}\r\n\r\n.TCwuw_QvwT4pCSFlC4lVE {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background: url(" + __webpack_require__(168) + ") no-repeat center center fixed;\r\n  transition: 0.5s;\r\n  -webkit-transition: 0.5s;\r\n  -moz-transition: 0.5s;\r\n}\r\n\r\n._1ADX0Op_B9W3jCLONO6Gy- {\r\n  width: 400%;\r\n  height: 100%;\r\n}\r\n\r\n._1ADX0Op_B9W3jCLONO6Gy- .wrap{\r\n  float: left;\r\n  width: 25%;\r\n  height: 100%;\r\n}\r\n\r\n.K7Ns_bnhTG7dPg9tenylf {\r\n  color: #ffffff;\r\n  position: relative;\r\n}\r\n\r\n._2v_O6eN6KOU9Fl9_pOc8y- {\r\n  font-size: 16px;\r\n  text-align: center;\r\n  margin-top: 83px;\r\n  font-weight: 300;\r\n}\r\n\r\n._2TIWZr_g5P3xLf4nxcJY5G {\r\n  margin: 15px auto;\r\n  text-align: center;\r\n  animation-delay: 0.5s;\r\n  -webkit-animation-delay: 0.5s;\r\n  -moz-animation-delay: 0.5s;\r\n  animation-duration: 0.5s;\r\n  -webkit-animation-duration: 0.5s;\r\n  -moz-animation-duration: 0.5s;\r\n}\r\n\r\n._2TIWZr_g5P3xLf4nxcJY5G .circle {\r\n  display: inline-block;\r\n  margin: 0 11px;\r\n  border-radius: 50%;\r\n  width: 8px;\r\n  height: 8px;\r\n  border: 1px #ffffff solid;\r\n  transition: 0.2s;\r\n  -webkit-transition: 0.2s;\r\n  -moz-transition: 0.2s;\r\n}\r\n\r\n.vQ46MDAyo9tGsSNAPSrR2 {\r\n  margin: 35px auto;\r\n  width: 264px;\r\n}\r\n\r\n.pcdLpqUPAM3Kn_T9zdQAN {\r\n  float: left;\r\n  margin: 6px 12px;\r\n  border-radius: 50%;\r\n  width: 60px;\r\n  height: 60px;\r\n  border: 2px #ffffff solid;\r\n  text-align: center;\r\n  cursor: pointer;\r\n  transition: 0.5s;\r\n  -webkit-transition: 0.5s;\r\n  -moz-transition: 0.5s;\r\n}\r\n\r\n.pcdLpqUPAM3Kn_T9zdQAN:active{\r\n  background: #ffffff;\r\n  transition: 0.1s;\r\n  -webkit-transition: 0.1s;\r\n  -moz-transition: 0.1s;\r\n}\r\n\r\n.pcdLpqUPAM3Kn_T9zdQAN .num{\r\n  font-size: 26px;\r\n  padding-top: 10px;\r\n}\r\n\r\n.pcdLpqUPAM3Kn_T9zdQAN .en{\r\n  font-size: 8px;\r\n}\r\n\r\n.pcdLpqUPAM3Kn_T9zdQAN:last-child{\r\n  margin-left: 100px;\r\n}\r\n\r\n.pcdLpqUPAM3Kn_T9zdQAN:last-child .num{\r\n  padding-top: 15px;\r\n}\r\n\r\n._1uJnbV2FlDKqDFFvGhJMZz {\r\n  color: #000000;\r\n}\r\n\r\n\r\n._2Jrm98oTdMWr5kMYI4U2-x {\r\n  margin-top: 50px;\r\n  font-size: 78px;\r\n  text-align: center;\r\n}\r\n\r\n._36-iPVwHJfeR1sqRFChRu- {\r\n  font-size: 15px;\r\n  text-align: center;\r\n  margin-top: -7px;\r\n}\r\n\r\n._3FFyNdcLuhdFQOuW41OIzo, ._2qPhcp4tTPPX12zhkN-wQU {\r\n  position: absolute;\r\n  display: inline-block;\r\n  font-size: 12px;\r\n  bottom: 30px;\r\n  width: 60px;\r\n  text-align: center;\r\n  cursor: pointer;\r\n}\r\n\r\n._3FFyNdcLuhdFQOuW41OIzo:active, ._2qPhcp4tTPPX12zhkN-wQU:active {\r\n  opacity: 0.5;\r\n}\r\n\r\n._3FFyNdcLuhdFQOuW41OIzo {\r\n  left: 36px;\r\n}\r\n\r\n._2qPhcp4tTPPX12zhkN-wQU {\r\n  right: 36px;\r\n}", ""]);
 
 	// exports
 	exports.locals = {
@@ -20708,7 +20707,7 @@
 /* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "/images/11ef2737357ca07ea8dea40c4115a08c.jpg";
+	module.exports = __webpack_require__.p + "/build/images/lock.jpg";
 
 /***/ },
 /* 169 */
