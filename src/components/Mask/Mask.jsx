@@ -5,27 +5,56 @@ class Mask extends React.Component {
   constructor(...args) {
     super(...args);
     this.state = {
-      opacity: 1
+      opacity: 1,
+      isDoing: false
     };
   }
 
   open() {
+    if(this.state.isDoing) {
+      return;
+    }
+    //正在打开
     this.setState({
-      opacity: 0
-    });
+      opacity: 0,
+      isDoing: true
+    }, () => {
     setTimeout(() => {
       this.refs.mask.style.display = 'none';
-    }, 500);
+        this.setState({
+          isDoing: false
+        })
+      }, 500);
+    });
+  }
+
+  isDoing() {
+    return this.state.isDoing;
   }
 
   close(callback) {
+    console.log(this.state.isDoing);
+    if(this.state.isDoing) {
+      return;
+    }
+    this.refs.mask.style.display = 'block';
+    this.refs.mask.style.opacity = '0';
+    //正在关闭
     this.setState({
-      opacity: 1
-    });
-    setTimeout(() => {
-      this.refs.mask.style.display = 'block';
-      callback && callback();
-    }, 500);
+      isDoing: true
+    }, () => {
+      setTimeout(() => {
+        this.setState({
+          opacity: 1
+        });
+        setTimeout(() => {
+          this.setState({
+            isDoing: false
+          });
+          callback && callback();
+        }, 500);
+      }, 0);
+    })
   }
 
   prepareClose() {

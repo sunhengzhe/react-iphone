@@ -19747,6 +19747,24 @@
 	        this.refs.lockScreen.changeToMain();
 	      }
 	    }
+
+	    /**
+	     * 电源键
+	     * @return {[type]} [description]
+	     */
+
+	  }, {
+	    key: 'handlePower',
+	    value: function handlePower() {
+	      if (this.refs.mask.isDoing()) {
+	        return;
+	      }
+	      if (this.state.status == 'close') {
+	        this.openScreen();
+	      } else {
+	        this.closeScreen();
+	      }
+	    }
 	  }, {
 	    key: 'handleMouseMove',
 	    value: function handleMouseMove() {
@@ -19833,7 +19851,8 @@
 	          _react2.default.createElement(_LockScreen2.default, { ref: 'lockScreen' }),
 	          _react2.default.createElement(_Mask2.default, { ref: 'mask' })
 	        ),
-	        _react2.default.createElement('a', { className: _App2.default.home, onMouseDown: this.handleHome.bind(this), onMouseUp: this.prepareClose.bind(this) })
+	        _react2.default.createElement('a', { className: _App2.default.home, onMouseDown: this.handleHome.bind(this), onMouseUp: this.prepareClose.bind(this) }),
+	        _react2.default.createElement('a', { className: _App2.default.power, onMouseDown: this.handlePower.bind(this) })
 	      );
 	    }
 	  }]);
@@ -19878,7 +19897,7 @@
 
 
 	// module
-	exports.push([module.id, "._38qnuCh-PyjVaBKlTLpyYZ {\n  margin: 10px auto;\n  background: #F2F3F5;\n  width: 346px;\n  height: 722px;\n  position: relative;\n  border-radius: 50px;\n  border-style: solid;\n  border-color: #c0c0c0;\n  border-top-width: 2px;\n  border-left-width: 5px;\n  border-bottom-width: 2px;\n  border-right-width: 5px;\n}\n\n._2YIz2WJRy1HrTPTuo9uanT {\n  position: absolute;\n  top: 15px;\n  left: 50%;\n  width: 110px;\n  height: 40px;\n  transform: translate(-50%, 0);\n}\n\n.hSaytvPDEYw5w0PIJIZyn {\n  width: 10px;\n  height: 10px;\n  border-radius: 50%;\n  background: #000000;\n  margin: 0 auto;\n}\n\n.c2-mvd-BTuDGq5qozSRgW {\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  position: absolute;\n  background: #000000;\n  left: 0;\n  top: 17px;\n}\n\n._2OP7Wm0pXfNAvVgHzjYiKV {\n  width: 50px;\n  height: 6px;\n  border-radius: 6px;\n  background: #000000;\n  margin: 10px auto;\n}\n\n.JQ28HXwbHo_bbOAnEZEdv {\n  position: absolute;\n  top: 80px;\n  left: 15px;\n  width: 316px;\n  height: 562px;\n  overflow: hidden;\n}\n\n._2wx7fGAfZKZ6XJE90Hf4ZV {\n  display: inline-block;\n  position: absolute;\n  bottom: 15px;\n  left: 50%;\n  width: 55px;\n  height: 55px;\n  border-radius: 50%;\n  border: 3px #c0c0c0 solid;\n  box-sizing: border-box;\n  transform: translate(-50%, 0);\n  cursor: pointer;\n}\n\n._2wx7fGAfZKZ6XJE90Hf4ZV:active {\n  background: #E2E4E9;\n}\n", ""]);
+	exports.push([module.id, "._38qnuCh-PyjVaBKlTLpyYZ {\n  margin: 10px auto;\n  background: #F2F3F5;\n  width: 346px;\n  height: 722px;\n  position: relative;\n  border-radius: 50px;\n  border-style: solid;\n  border-color: #c0c0c0;\n  border-top-width: 2px;\n  border-left-width: 5px;\n  border-bottom-width: 2px;\n  border-right-width: 5px;\n}\n\n._2YIz2WJRy1HrTPTuo9uanT {\n  position: absolute;\n  top: 15px;\n  left: 50%;\n  width: 110px;\n  height: 40px;\n  transform: translate(-50%, 0);\n}\n\n.hSaytvPDEYw5w0PIJIZyn {\n  width: 10px;\n  height: 10px;\n  border-radius: 50%;\n  background: #000000;\n  margin: 0 auto;\n}\n\n.c2-mvd-BTuDGq5qozSRgW {\n  width: 12px;\n  height: 12px;\n  border-radius: 50%;\n  position: absolute;\n  background: #000000;\n  left: 0;\n  top: 17px;\n}\n\n._2OP7Wm0pXfNAvVgHzjYiKV {\n  width: 50px;\n  height: 6px;\n  border-radius: 6px;\n  background: #000000;\n  margin: 10px auto;\n}\n\n.JQ28HXwbHo_bbOAnEZEdv {\n  position: absolute;\n  top: 80px;\n  left: 15px;\n  width: 316px;\n  height: 562px;\n  overflow: hidden;\n}\n\n._2wx7fGAfZKZ6XJE90Hf4ZV {\n  display: inline-block;\n  position: absolute;\n  bottom: 15px;\n  left: 50%;\n  width: 55px;\n  height: 55px;\n  border-radius: 50%;\n  border: 3px #c0c0c0 solid;\n  box-sizing: border-box;\n  transform: translate(-50%, 0);\n  cursor: pointer;\n}\n\n._2wx7fGAfZKZ6XJE90Hf4ZV:active {\n  background: #E2E4E9;\n}\n\n._3zoaw6aA3lVsQj-smRMpdQ {\n  display: inline-block;\n  position: absolute;\n  top: 145px;\n  right: -10px;\n  width: 5px;\n  height: 55px;\n  background-color: #F2F3F5;\n  border: 2px #ccc solid;\n  border-left: none;\n  border-top-right-radius: 8px;\n  border-bottom-right-radius: 8px;\n  cursor: pointer;\n}\n\n._3zoaw6aA3lVsQj-smRMpdQ:active {\n  width: 3px;\n  right: -7px;\n}", ""]);
 
 	// exports
 	exports.locals = {
@@ -19888,7 +19907,8 @@
 		"camera": "c2-mvd-BTuDGq5qozSRgW",
 		"receiver": "_2OP7Wm0pXfNAvVgHzjYiKV",
 		"screen": "JQ28HXwbHo_bbOAnEZEdv",
-		"home": "_2wx7fGAfZKZ6XJE90Hf4ZV"
+		"home": "_2wx7fGAfZKZ6XJE90Hf4ZV",
+		"power": "_3zoaw6aA3lVsQj-smRMpdQ"
 	};
 
 /***/ },
@@ -20240,7 +20260,8 @@
 	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Mask)).call.apply(_Object$getPrototypeO, [this].concat(args)));
 
 	    _this.state = {
-	      opacity: 1
+	      opacity: 1,
+	      isDoing: false
 	    };
 	    return _this;
 	  }
@@ -20250,25 +20271,54 @@
 	    value: function open() {
 	      var _this2 = this;
 
+	      if (this.state.isDoing) {
+	        return;
+	      }
+	      //正在打开
 	      this.setState({
-	        opacity: 0
+	        opacity: 0,
+	        isDoing: true
+	      }, function () {
+	        setTimeout(function () {
+	          _this2.refs.mask.style.display = 'none';
+	          _this2.setState({
+	            isDoing: false
+	          });
+	        }, 500);
 	      });
-	      setTimeout(function () {
-	        _this2.refs.mask.style.display = 'none';
-	      }, 500);
+	    }
+	  }, {
+	    key: 'isDoing',
+	    value: function isDoing() {
+	      return this.state.isDoing;
 	    }
 	  }, {
 	    key: 'close',
 	    value: function close(callback) {
 	      var _this3 = this;
 
+	      console.log(this.state.isDoing);
+	      if (this.state.isDoing) {
+	        return;
+	      }
+	      this.refs.mask.style.display = 'block';
+	      this.refs.mask.style.opacity = '0';
+	      //正在关闭
 	      this.setState({
-	        opacity: 1
+	        isDoing: true
+	      }, function () {
+	        setTimeout(function () {
+	          _this3.setState({
+	            opacity: 1
+	          });
+	          setTimeout(function () {
+	            _this3.setState({
+	              isDoing: false
+	            });
+	            callback && callback();
+	          }, 500);
+	        }, 0);
 	      });
-	      setTimeout(function () {
-	        _this3.refs.mask.style.display = 'block';
-	        callback && callback();
-	      }, 500);
 	    }
 	  }, {
 	    key: 'prepareClose',
@@ -20355,6 +20405,7 @@
 
 	    _this.state = {
 	      isDrag: false,
+	      isDoing: false,
 	      position: -50,
 	      curPage: 'main',
 	      bgWidth: SCREEN_WIDTH,
@@ -20501,9 +20552,20 @@
 	  }, {
 	    key: 'open',
 	    value: function open() {
+	      var _this3 = this;
+
+	      if (this.state.isDoing) {
+	        return;
+	      }
 	      this.setState({
-	        bgWidth: SCREEN_WIDTH * 1.1
+	        bgWidth: SCREEN_WIDTH * 1.1,
+	        isDoing: true
 	      });
+	      setTimeout(function () {
+	        _this3.setState({
+	          isDoing: false
+	        });
+	      }, 500);
 	    }
 
 	    /**
@@ -20513,9 +20575,20 @@
 	  }, {
 	    key: 'close',
 	    value: function close() {
+	      var _this4 = this;
+
+	      if (this.state.isDoing) {
+	        return;
+	      }
 	      this.setState({
-	        bgWidth: SCREEN_WIDTH
+	        bgWidth: SCREEN_WIDTH,
+	        isDoing: true
 	      });
+	      setTimeout(function () {
+	        _this4.setState({
+	          isDoing: false
+	        });
+	      }, 500);
 	    }
 
 	    /**
@@ -20532,7 +20605,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this3 = this;
+	      var _this5 = this;
 
 	      var bgOpacity = this.state.position * 0.02 + 1;
 	      var lockStyle = {
@@ -20577,7 +20650,7 @@
 	              this.keyTexts.map(function (item) {
 	                return _react2.default.createElement(
 	                  'div',
-	                  { key: item.num, className: _LockScreen2.default.key, onClick: _this3.enterPassword.bind(_this3, item.num) },
+	                  { key: item.num, className: _LockScreen2.default.key, onClick: _this5.enterPassword.bind(_this5, item.num) },
 	                  _react2.default.createElement(
 	                    'div',
 	                    { className: 'num' },

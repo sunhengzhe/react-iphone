@@ -74,3 +74,23 @@
 .home:active {
   background: #E2E4E9;
 }
+
+.power {
+  display: inline-block;
+  position: absolute;
+  top: 145px;
+  right: -10px;
+  width: 5px;
+  height: 55px;
+  background-color: #F2F3F5;
+  border: 2px #ccc solid;
+  border-left: none;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  cursor: pointer;
+}
+
+.power:active {
+  width: 3px;
+  right: -7px;
+}

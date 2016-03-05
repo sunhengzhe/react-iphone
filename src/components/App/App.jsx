@@ -33,6 +33,21 @@ class App extends React.Component {
     }
   }
 
+  /**
+   * 电源键
+   * @return {[type]} [description]
+   */
+  handlePower() {
+    if(this.refs.mask.isDoing()){
+      return;
+    }
+    if(this.state.status == 'close') {
+      this.openScreen();
+    }else {
+      this.closeScreen();
+    }
+  }
+
   handleMouseMove() {
     if(this.state.status != 'close') {
       this.openScreen();
@@ -101,6 +116,7 @@ class App extends React.Component {
           <Mask ref="mask" />
         </div>
         <a className={style.home} onMouseDown={this.handleHome.bind(this)} onMouseUp={this.prepareClose.bind(this)}></a>
+        <a className={style.power} onMouseDown={this.handlePower.bind(this)}></a>
       </div>
     );
   }

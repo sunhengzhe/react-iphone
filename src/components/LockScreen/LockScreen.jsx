@@ -11,6 +11,7 @@ class LockScreen extends React.Component {
     super(...args);
     this.state = {
       isDrag: false,
+      isDoing: false,
       position: -50,
       curPage: 'main',
       bgWidth: SCREEN_WIDTH,
@@ -144,18 +145,36 @@ class LockScreen extends React.Component {
    * 屏幕打开
    */
   open() {
+    if(this.state.isDoing) {
+      return;
+    }
     this.setState({
-      bgWidth: SCREEN_WIDTH * 1.1
+      bgWidth: SCREEN_WIDTH * 1.1,
+      isDoing: true
     });
+    setTimeout(() => {
+      this.setState({
+        isDoing: false
+      })
+    }, 500);
   }
 
   /**
    * 屏幕关闭
    */
   close() {
+    if(this.state.isDoing) {
+      return;
+    }
     this.setState({
-      bgWidth: SCREEN_WIDTH
+      bgWidth: SCREEN_WIDTH,
+      isDoing: true
     });
+    setTimeout(() => {
+      this.setState({
+        isDoing: false
+      })
+    }, 500);
   }
 
   /**
