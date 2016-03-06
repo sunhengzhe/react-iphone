@@ -136,6 +136,7 @@ class LockScreen extends React.Component {
         // 检查密码
         if(this.state.password == PASSWORD) {
           // 解除锁屏
+          this.unlock();
         } else {
           // 密码错误
           var curClass = this.refs.circleBox.getAttribute('class');
@@ -166,6 +167,29 @@ class LockScreen extends React.Component {
       this.setState({
         isDoing: false
       })
+    }, 500);
+  }
+
+  /**
+  * 屏幕解锁
+  */
+  unlock() {
+    this.refs[this.state.curPage].style.transform = 'scale(0.5)';
+    this.refs.lockScreen.style.opacity = '0';
+    setTimeout(() => {
+      this.refs.lockScreen.style.display = 'none';
+    }, 500);
+  }
+
+  /**
+  * 屏幕锁定
+  */
+  lock() {
+    setTimeout(() => {
+      this.refs.lockScreen.style.display = 'block';
+      this.refs.lockScreen.style.opacity = '1';
+      this.refs[this.state.curPage].style.transform = 'scale(1)';
+      this.close();
     }, 500);
   }
 
@@ -212,11 +236,11 @@ class LockScreen extends React.Component {
     return (
       <div className={style.lockScreen} onMouseDown={this.handleMouseDown.bind(this)}
         onMouseMove={this.handleMouseMove.bind(this)} onMouseUp={this.handleMouseUp.bind(this)}
-        onMouseLeave={this.handleMouseUp.bind(this)}>
+        onMouseLeave={this.handleMouseUp.bind(this)} ref="lockScreen">
         <div className={style.bgWrap} style={bgStyle}></div>
         <div className={style.lockWrap} style={lockStyle}>
           <div className="wrap"></div>
-          <div className={style.pwdWrap + " wrap"}>
+          <div className={style.pwdWrap + " wrap"} ref="password">
             <div className={style.info}>Touch ID 或输入密码</div>
             <div className={style.circleBox} ref="circleBox">
               <a className="circle" style={{background: this.state.password.length>0?'#fff':''}}></a>
@@ -243,7 +267,7 @@ class LockScreen extends React.Component {
             <span className={style.urgency}>紧急情况</span>
             <span className={style.cancel} onClick={this.cancel.bind(this)}>删除</span>
           </div>
-          <div className={style.main  + " wrap"}>
+          <div className={style.main  + " wrap"} ref="main">
             <div className={style.timeWrap}>
               <span>{this.state.time.hour}:{this.state.time.min}</span>
             </div>

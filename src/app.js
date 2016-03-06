@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './components/App/App.jsx';
-
+import Device from './components/Device/Device.jsx';
+let name = 'Device';
 ReactDOM.render(
-  <App />,
+  <Device />,
   document.getElementById('container')
 )
