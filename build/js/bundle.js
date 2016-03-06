@@ -19726,16 +19726,43 @@
 	      leaveTime: 0,
 	      leaveInterval: null
 	    };
+
+	    _this.clock();
 	    return _this;
 	  }
 
-	  /**
-	   * home 键按钮
-	   * @return {[type]} [description]
-	   */
-
-
 	  _createClass(App, [{
+	    key: 'clock',
+	    value: function clock() {
+	      var _this2 = this;
+
+	      var weekMap = ['日', '一', '二', '三', '四', '五', '六'];
+	      setTimeout(function () {
+	        var date = new Date();
+	        var clock = {
+	          month: date.getMonth() + 1,
+	          day: date.getDate(),
+	          week: weekMap[date.getDay()],
+	          hour: date.getHours(),
+	          min: date.getMinutes()
+	        };
+
+	        clock.hour = '00'.concat(clock.hour.toString()).slice(clock.hour.toString().length);
+	        clock.min = '00'.concat(clock.min.toString()).slice(clock.min.toString().length);
+
+	        _this2.refs.lockScreen.setClock(clock);
+	        setTimeout(function () {
+	          _this2.clock();
+	        }, 1000);
+	      }, 0);
+	    }
+
+	    /**
+	     * home 键按钮
+	     * @return {[type]} [description]
+	     */
+
+	  }, {
 	    key: 'handleHome',
 	    value: function handleHome() {
 	      this.openScreen();
@@ -19815,18 +19842,18 @@
 	  }, {
 	    key: 'prepareClose',
 	    value: function prepareClose() {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      if (this.state.status != 'close') {
 	        this.state.leaveInterval = setInterval(function () {
-	          console.log('leave...' + _this2.state.leaveTime);
-	          _this2.setState({
-	            leaveTime: _this2.state.leaveTime + 1
+	          console.log('leave...' + _this3.state.leaveTime);
+	          _this3.setState({
+	            leaveTime: _this3.state.leaveTime + 1
 	          });
-	          if (_this2.state.leaveTime == CLOSE_TIME - 5) {
-	            _this2.refs.mask.prepareClose();
-	          } else if (_this2.state.leaveTime == CLOSE_TIME) {
-	            _this2.closeScreen();
+	          if (_this3.state.leaveTime == CLOSE_TIME - 5) {
+	            _this3.refs.mask.prepareClose();
+	          } else if (_this3.state.leaveTime == CLOSE_TIME) {
+	            _this3.closeScreen();
 	          }
 	        }, 1000);
 	      }
@@ -19846,7 +19873,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: _App2.default.screen, onMouseUp: this.prepareClose.bind(this), onMouseMove: this.handleMouseMove.bind(this), onMouseLeave: this.prepareClose.bind(this) },
+	          { className: _App2.default.screen, onMouseMove: this.handleMouseMove.bind(this), onMouseLeave: this.prepareClose.bind(this) },
 	          _react2.default.createElement(_Desktop2.default, null),
 	          _react2.default.createElement(_LockScreen2.default, { ref: 'lockScreen' }),
 	          _react2.default.createElement(_Mask2.default, { ref: 'mask' })
@@ -20297,7 +20324,6 @@
 	    value: function close(callback) {
 	      var _this3 = this;
 
-	      console.log(this.state.isDoing);
 	      if (this.state.isDoing) {
 	        return;
 	      }
@@ -20409,7 +20435,8 @@
 	      position: -50,
 	      curPage: 'main',
 	      bgWidth: SCREEN_WIDTH,
-	      password: ''
+	      password: '',
+	      time: {}
 	    };
 	    _this.keyTexts = [{ num: '1', en: '' }, { num: '2', en: 'A B C' }, { num: '3', en: 'D E F' }, { num: '4', en: 'G H I' }, { num: '5', en: 'J K L' }, { num: '6', en: 'M N O' }, { num: '7', en: 'P Q R S' }, { num: '8', en: 'T U V' }, { num: '9', en: 'W X Y Z' }, { num: '0', en: '' }];
 	    return _this;
@@ -20426,6 +20453,18 @@
 	      this.setState({
 	        isDrag: true,
 	        startX: e.pageX
+	      });
+	    }
+
+	    /**
+	    * 改变时间
+	    */
+
+	  }, {
+	    key: 'setClock',
+	    value: function setClock(options) {
+	      this.setState({
+	        time: options
 	      });
 	    }
 
@@ -20692,7 +20731,9 @@
 	              _react2.default.createElement(
 	                'span',
 	                null,
-	                '22:34'
+	                this.state.time.hour,
+	                ':',
+	                this.state.time.min
 	              )
 	            ),
 	            _react2.default.createElement(
@@ -20701,13 +20742,17 @@
 	              _react2.default.createElement(
 	                'span',
 	                null,
-	                '3月3日'
+	                this.state.time.month,
+	                '月',
+	                this.state.time.day,
+	                '日'
 	              ),
 	              ' ',
 	              _react2.default.createElement(
 	                'span',
 	                null,
-	                '星期四'
+	                '星期',
+	                this.state.time.week
 	              )
 	            )
 	          ),

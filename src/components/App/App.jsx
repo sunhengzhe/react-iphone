@@ -15,7 +15,31 @@ class App extends React.Component {
       status: 'close',
       leaveTime: 0,
       leaveInterval: null
-    }
+    };
+
+    this.clock();
+  }
+
+  clock() {
+    let weekMap = ['日', '一', '二', '三', '四', '五', '六'];
+    setTimeout(() => {
+      let date = new Date();
+      let clock = {
+        month: date.getMonth() + 1,
+        day: date.getDate(),
+        week: weekMap[date.getDay()],
+        hour: date.getHours(),
+        min: date.getMinutes()        
+      }
+
+      clock.hour = '00'.concat(clock.hour.toString()).slice(clock.hour.toString().length);
+      clock.min = '00'.concat(clock.min.toString()).slice(clock.min.toString().length);
+
+      this.refs.lockScreen.setClock(clock);
+      setTimeout(() => {
+        this.clock();
+      }, 1000)
+    }, 0);
   }
 
   /**
@@ -110,7 +134,7 @@ class App extends React.Component {
           <div className={style.camera}></div>
           <div className={style.receiver}></div>
         </div>
-        <div className={style.screen} onMouseUp={this.prepareClose.bind(this)} onMouseMove={this.handleMouseMove.bind(this)} onMouseLeave={this.prepareClose.bind(this)}>
+        <div className={style.screen} onMouseMove={this.handleMouseMove.bind(this)} onMouseLeave={this.prepareClose.bind(this)}>
           <Desktop />
           <LockScreen ref="lockScreen"/>
           <Mask ref="mask" />

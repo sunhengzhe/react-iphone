@@ -33,7 +33,6 @@ class Mask extends React.Component {
   }
 
   close(callback) {
-    console.log(this.state.isDoing);
     if(this.state.isDoing) {
       return;
     }

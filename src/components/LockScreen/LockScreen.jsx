@@ -15,7 +15,8 @@ class LockScreen extends React.Component {
       position: -50,
       curPage: 'main',
       bgWidth: SCREEN_WIDTH,
-      password: ''
+      password: '',
+      time: {}
     };
     this.keyTexts = [
       {num: '1', en: ''},
@@ -39,6 +40,15 @@ class LockScreen extends React.Component {
       isDrag: true,
       startX: e.pageX
     });
+  }
+
+  /**
+  * 改变时间
+  */
+  setClock(options) {
+    this.setState({
+      time: options
+    })
   }
 
 /**
@@ -235,10 +245,10 @@ class LockScreen extends React.Component {
           </div>
           <div className={style.main  + " wrap"}>
             <div className={style.timeWrap}>
-              <span>22:34</span>
+              <span>{this.state.time.hour}:{this.state.time.min}</span>
             </div>
             <div className={style.dateWrap}>
-              <span>3月3日</span> <span>星期四</span>
+              <span>{this.state.time.month}月{this.state.time.day}日</span> <span>星期{this.state.time.week}</span>
             </div>
           </div>
           <div className="wrap"></div>
