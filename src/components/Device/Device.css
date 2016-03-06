@@ -20,6 +20,8 @@
   width: 110px;
   height: 40px;
   transform: translate(-50%, 0);
+  -webkit-transform: translate(-50%, 0);
+  -moz-transform: translate(-50%, 0);
 }
 
 .ccd {
@@ -68,6 +70,8 @@
   border: 3px #c0c0c0 solid;
   box-sizing: border-box;
   transform: translate(-50%, 0);
+  -webkit-transform: translate(-50%, 0);
+  -moz-transform: translate(-50%, 0);
   cursor: pointer;
 }
 

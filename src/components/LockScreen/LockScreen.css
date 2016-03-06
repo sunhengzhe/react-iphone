@@ -32,6 +32,8 @@
   width: 25%;
   height: 100%;
   transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
 }
 
 .pwdWrap {
