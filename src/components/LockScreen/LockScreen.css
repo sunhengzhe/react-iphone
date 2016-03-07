@@ -17,6 +17,8 @@
   left: 0;
   right: 0;
   background: url("./images/lock.jpg") no-repeat center center;
+  filter: blur(0px);
+  -webkit-filter: blur(0px);
   transition: 0.5s;
   -webkit-transition: 0.5s;
   -moz-transition: 0.5s;

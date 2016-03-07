@@ -64,6 +64,11 @@
   cursor: pointer;
 }
 
+:global .icon:active {
+  filter:brightness(0.5);
+  -webkit-filter:brightness(0.5);
+}
+
 :global .appname {
   text-align: center;
   font-size: 12px;

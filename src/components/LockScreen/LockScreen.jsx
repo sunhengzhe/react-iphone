@@ -230,7 +230,9 @@ class LockScreen extends React.Component {
 
 
     let bgStyle = {
-      backgroundSize: this.state.bgWidth
+      backgroundSize: this.state.bgWidth,
+      filter: this.state.position >= -25 ? 'blur(5px)' : '',
+      WebkitFilter: this.state.position >= -25 ? 'blur(5px)' : ''
     }
 
     return (
