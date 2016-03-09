@@ -61,6 +61,8 @@ class LockScreen extends React.Component {
       curPage: 'main',
       password: ''
     });
+    //通知父组件
+    this.props.swiperHandle(-50);
   }
 
 /**
@@ -72,6 +74,8 @@ class LockScreen extends React.Component {
       position: -25,
       curPage: 'password'
     });
+    //通知父组件
+    this.props.swiperHandle(-25);
   }
 
 /**
@@ -121,7 +125,8 @@ class LockScreen extends React.Component {
           position: -25 + transDis
         })
       }
-
+      //通知父组件
+      this.props.swiperHandle(this.state.position);
     }
   }
 

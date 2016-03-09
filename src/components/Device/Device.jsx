@@ -30,7 +30,7 @@ class Device extends React.Component {
         day: date.getDate(),
         week: weekMap[date.getDay()],
         hour: date.getHours(),
-        min: date.getMinutes()        
+        min: date.getMinutes()
       }
 
       clock.hour = '00'.concat(clock.hour.toString()).slice(clock.hour.toString().length);
@@ -127,6 +127,10 @@ class Device extends React.Component {
     }
   }
 
+  swiperHandle(position) {
+    this.refs.navigation.changeTheme(position);
+  }
+
   render() {
     return (
       <div className={style.phone}>
@@ -137,8 +141,8 @@ class Device extends React.Component {
         </div>
         <div className={style.screen} onMouseMove={this.handleMouseMove.bind(this)} onMouseLeave={this.prepareClose.bind(this)}>
           <Desktop />
-          <LockScreen ref="lockScreen"/>
-          <Navigation />
+          <LockScreen ref="lockScreen" swiperHandle={this.swiperHandle.bind(this)}/>
+          <Navigation ref="navigation" />
           <Mask ref="mask" />
         </div>
         <a className={style.home} onMouseDown={this.handleHome.bind(this)} onMouseUp={this.prepareClose.bind(this)}></a>
