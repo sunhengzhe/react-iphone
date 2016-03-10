@@ -17,8 +17,12 @@
   float: right;
 }
 
-.center {
-
+.time {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  -webkit-transform: translate(-50%, 0);
+  -moz-transform: translate(-50%, 0);
 }
 
 .service {
@@ -36,7 +40,7 @@
   height: 0.4em;
   margin: 0 0.1em;
   border-radius: 50%;
-  border: 0.5px #000 solid;
+  border: 1px #000 solid;
 }
 
 :global(.black) {

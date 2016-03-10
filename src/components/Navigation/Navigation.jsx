@@ -8,7 +8,8 @@ class Navigation extends React.Component {
       signal: 4,
       theme: 'black',
       fontSize: 'big',
-      opacity: 1
+      opacity: 1,
+      time: {}
     }
   }
 
@@ -35,6 +36,15 @@ class Navigation extends React.Component {
   changeTheme(theme) {
     this.setState({
       theme: theme
+    })
+  }
+
+  /**
+  * 改变时间
+  */
+  setClock(options) {
+    this.setState({
+      time: options
     })
   }
 
@@ -72,7 +82,9 @@ class Navigation extends React.Component {
           <span className={style.service}>中国移动</span>
           <span className={style.internet}>4G</span>
         </div>
-        <div className={style.center}></div>
+        <div className={style.time} style={{display: (this.state.fontSize == 'big' ? 'none' : 'block')}}>
+          {this.state.time.hour + ':' + this.state.time.min}
+        </div>
         <div className={style.right}>
           <span>71%</span>
         </div>

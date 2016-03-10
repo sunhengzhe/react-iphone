@@ -42,7 +42,8 @@ class Desktop extends React.Component {
       position: -33.33,
       totalPage: 3,
       pageIndex: 1,
-      transPer: 0
+      transPer: 0,
+      scale: 2
     }
   }
 
@@ -84,6 +85,18 @@ class Desktop extends React.Component {
     }
   }
 
+  enter() {
+    this.setState({
+      scale: 1
+    })
+  }
+
+  leave() {
+    this.setState({
+      scale: 2
+    })
+  }
+
   /**
    * 手指移动
    */
@@ -96,7 +109,7 @@ class Desktop extends React.Component {
       let transPer = moveDis * (100 / this.state.totalPage) / SCREEN_WIDTH;
 
       if(this.state.pageIndex == 1 || this.state.pageIndex == this.state.totalPage - 2) {
-        transPer = transPer / 2;
+        transPer = transPer / 3;
       }
       this.setState({
         transPer: transPer
@@ -107,16 +120,21 @@ class Desktop extends React.Component {
   render() {
     let desktopWrapStyle = {
       transform: 'translate(-' + (100 / this.state.totalPage * this.state.pageIndex - this.state.transPer) + '%, 0)',
-      transition: this.state.isDrag ? '' : '0.5s'
+      transition: this.state.isDrag ? '' : '0.5s',
+
+    }
+
+    let scareStyle = {
+      transform: 'scale(' + this.state.scale + ')'
     }
     return (
       <div className={style.desktop}>
         <div className={style.bgWrap}></div>
         <div className={style.desktopWrap} style={desktopWrapStyle}  onMouseDown={this.handleMouseDown.bind(this)}
         onMouseMove={this.handleMouseMove.bind(this)} onMouseUp={this.handleMouseUp.bind(this)}
-        onMouseLeave={this.handleMouseUp.bind(this)} >
+        onMouseLeave={this.handleMouseUp.bind(this)}>
           <div className={style.page}></div>
-          <div className={style.page}>
+          <div className={style.page} style={scareStyle}>
             <div className={style.appWrap}>
               {
                 desktopApps.map((item, index) => {

@@ -19756,6 +19756,7 @@
 	        clock.min = '00'.concat(clock.min.toString()).slice(clock.min.toString().length);
 
 	        _this2.refs.lockScreen.setClock(clock);
+	        _this2.refs.navigation.setClock(clock);
 	        setTimeout(function () {
 	          _this2.clock();
 	        }, 1000);
@@ -19830,8 +19831,18 @@
 	  }, {
 	    key: 'closeScreen',
 	    value: function closeScreen() {
+	      var _this3 = this;
+
 	      clearInterval(this.state.leaveInterval);
-	      this.refs.mask.close(this.refs.lockScreen.changeToMain.bind(this.refs.lockScreen));
+	      this.refs.mask.close(function () {
+	        // 锁屏切到主屏
+	        _this3.refs.lockScreen.changeToMain();
+	        // 桌面变大
+	        _this3.refs.desktop.leave();
+	        // 导航变为锁屏样式
+	        _this3.refs.navigation.changeFontSize('big');
+	        _this3.refs.navigation.changeTheme('black');
+	      });
 	      this.refs.lockScreen.lock();
 	      this.setState({
 	        status: 'close',
@@ -19847,18 +19858,18 @@
 	  }, {
 	    key: 'prepareClose',
 	    value: function prepareClose() {
-	      var _this3 = this;
+	      var _this4 = this;
 
 	      if (this.state.status != 'close') {
 	        this.state.leaveInterval = setInterval(function () {
-	          console.log('leave...' + _this3.state.leaveTime);
-	          _this3.setState({
-	            leaveTime: _this3.state.leaveTime + 1
+	          console.log('leave...' + _this4.state.leaveTime);
+	          _this4.setState({
+	            leaveTime: _this4.state.leaveTime + 1
 	          });
-	          if (_this3.state.leaveTime == CLOSE_TIME - 5) {
-	            _this3.refs.mask.prepareClose();
-	          } else if (_this3.state.leaveTime == CLOSE_TIME) {
-	            _this3.closeScreen();
+	          if (_this4.state.leaveTime == CLOSE_TIME - 5) {
+	            _this4.refs.mask.prepareClose();
+	          } else if (_this4.state.leaveTime == CLOSE_TIME) {
+	            _this4.closeScreen();
 	          }
 	        }, 1000);
 	      }
@@ -19868,6 +19879,11 @@
 	    value: function swiperHandle(position) {
 	      this.refs.navigation.changeStyle(position);
 	    }
+
+	    /*
+	    * 锁屏状态改变
+	    */
+
 	  }, {
 	    key: 'lockStateChanged',
 	    value: function lockStateChanged(state) {
@@ -19875,12 +19891,13 @@
 	        status: state
 	      });
 	      if (state == 'lock') {
-	        this.refs.navigation.changeFontSize('big');
-	        this.refs.navigation.changeTheme('black');
+	        // 导航改变字体和样式都写在closeScreen内
+	        // 桌面退出写在closeScreen内
 	      } else if (state == 'unlock') {
-	        this.refs.navigation.changeFontSize('small');
-	        this.refs.navigation.changeTheme('black');
-	      }
+	          this.refs.navigation.changeFontSize('small');
+	          this.refs.navigation.changeTheme('black');
+	          this.refs.desktop.enter();
+	        }
 	    }
 	  }, {
 	    key: 'render',
@@ -19898,7 +19915,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: _Device2.default.screen, onMouseMove: this.handleMouseMove.bind(this), onMouseLeave: this.prepareClose.bind(this) },
-	          _react2.default.createElement(_Desktop2.default, null),
+	          _react2.default.createElement(_Desktop2.default, { ref: 'desktop' }),
 	          _react2.default.createElement(_LockScreen2.default, { ref: 'lockScreen', swiperHandle: this.swiperHandle.bind(this), lockStateChanged: this.lockStateChanged.bind(this) }),
 	          _react2.default.createElement(_Navigation2.default, { ref: 'navigation' }),
 	          _react2.default.createElement(_Mask2.default, { ref: 'mask' })
@@ -20955,7 +20972,8 @@
 	      signal: 4,
 	      theme: 'black',
 	      fontSize: 'big',
-	      opacity: 1
+	      opacity: 1,
+	      time: {}
 	    };
 	    return _this;
 	  }
@@ -20987,6 +21005,18 @@
 	    value: function changeTheme(theme) {
 	      this.setState({
 	        theme: theme
+	      });
+	    }
+
+	    /**
+	    * 改变时间
+	    */
+
+	  }, {
+	    key: 'setClock',
+	    value: function setClock(options) {
+	      this.setState({
+	        time: options
 	      });
 	    }
 	  }, {
@@ -21038,7 +21068,11 @@
 	            '4G'
 	          )
 	        ),
-	        _react2.default.createElement('div', { className: _Navigation2.default.center }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: _Navigation2.default.time, style: { display: this.state.fontSize == 'big' ? 'none' : 'block' } },
+	          this.state.time.hour + ':' + this.state.time.min
+	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: _Navigation2.default.right },
@@ -21092,14 +21126,14 @@
 
 
 	// module
-	exports.push([module.id, "._3-n_N0doPih_dfVqas0z0Y {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  height: 1em;\r\n  padding: 0.2em;\r\n  line-height: 1em;\r\n  font-size: 0.7em;\r\n}\r\n\r\n._11KjG33LAFoJeJuQ2RrwCD {\r\n  float: left;\r\n}\r\n\r\n._3sxKGk763mJdqWxHWGXqI0 {\r\n  float: right;\r\n}\r\n\r\n._2OpxAKILNBSfJ2ZggB5R9p {\r\n\r\n}\r\n\r\n._28p6eCJu8sSNmQ19WKsFx8 {\r\n  margin: 0 0.2em;\r\n}\r\n\r\n._3RgvZhrYR7BVjsKJZEt38e {\r\n  margin-left: 0.2em;\r\n  margin-top: -0.1em;\r\n}\r\n\r\n._3RgvZhrYR7BVjsKJZEt38e span{\r\n  display: inline-block;\r\n  width: 0.4em;\r\n  height: 0.4em;\r\n  margin: 0 0.1em;\r\n  border-radius: 50%;\r\n  border: 0.5px #000 solid;\r\n}\r\n\r\n.black {\r\n  color: #000000;\r\n}\r\n\r\n.black ._3RgvZhrYR7BVjsKJZEt38e span {\r\n  border-color: #000000;\r\n}\r\n\r\n.black ._3RgvZhrYR7BVjsKJZEt38e span.fill {\r\n  background-color: #000000;\r\n}\r\n\r\n.white {\r\n  color: #ffffff;\r\n}\r\n\r\n.white ._3RgvZhrYR7BVjsKJZEt38e span {\r\n  border-color: #ffffff;\r\n}\r\n\r\n.white ._3RgvZhrYR7BVjsKJZEt38e span.fill {\r\n  background-color: #ffffff;\r\n}", ""]);
+	exports.push([module.id, "._3-n_N0doPih_dfVqas0z0Y {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  height: 1em;\r\n  padding: 0.2em;\r\n  line-height: 1em;\r\n  font-size: 0.7em;\r\n}\r\n\r\n._11KjG33LAFoJeJuQ2RrwCD {\r\n  float: left;\r\n}\r\n\r\n._3sxKGk763mJdqWxHWGXqI0 {\r\n  float: right;\r\n}\r\n\r\n.HIMWrMxCwaHOOD-t4R6XZ {\r\n  position: absolute;\r\n  left: 50%;\r\n  transform: translate(-50%, 0);\r\n  -webkit-transform: translate(-50%, 0);\r\n  -moz-transform: translate(-50%, 0);\r\n}\r\n\r\n._28p6eCJu8sSNmQ19WKsFx8 {\r\n  margin: 0 0.2em;\r\n}\r\n\r\n._3RgvZhrYR7BVjsKJZEt38e {\r\n  margin-left: 0.2em;\r\n  margin-top: -0.1em;\r\n}\r\n\r\n._3RgvZhrYR7BVjsKJZEt38e span{\r\n  display: inline-block;\r\n  width: 0.4em;\r\n  height: 0.4em;\r\n  margin: 0 0.1em;\r\n  border-radius: 50%;\r\n  border: 1px #000 solid;\r\n}\r\n\r\n.black {\r\n  color: #000000;\r\n}\r\n\r\n.black ._3RgvZhrYR7BVjsKJZEt38e span {\r\n  border-color: #000000;\r\n}\r\n\r\n.black ._3RgvZhrYR7BVjsKJZEt38e span.fill {\r\n  background-color: #000000;\r\n}\r\n\r\n.white {\r\n  color: #ffffff;\r\n}\r\n\r\n.white ._3RgvZhrYR7BVjsKJZEt38e span {\r\n  border-color: #ffffff;\r\n}\r\n\r\n.white ._3RgvZhrYR7BVjsKJZEt38e span.fill {\r\n  background-color: #ffffff;\r\n}", ""]);
 
 	// exports
 	exports.locals = {
 		"navigation": "_3-n_N0doPih_dfVqas0z0Y",
 		"left": "_11KjG33LAFoJeJuQ2RrwCD",
 		"right": "_3sxKGk763mJdqWxHWGXqI0",
-		"center": "_2OpxAKILNBSfJ2ZggB5R9p",
+		"time": "HIMWrMxCwaHOOD-t4R6XZ",
 		"service": "_28p6eCJu8sSNmQ19WKsFx8",
 		"signal": "_3RgvZhrYR7BVjsKJZEt38e"
 	};
@@ -21176,7 +21210,8 @@
 	      position: -33.33,
 	      totalPage: 3,
 	      pageIndex: 1,
-	      transPer: 0
+	      transPer: 0,
+	      scale: 2
 	    };
 	    return _this;
 	  }
@@ -21226,6 +21261,20 @@
 	        this.slide(0);
 	      }
 	    }
+	  }, {
+	    key: 'enter',
+	    value: function enter() {
+	      this.setState({
+	        scale: 1
+	      });
+	    }
+	  }, {
+	    key: 'leave',
+	    value: function leave() {
+	      this.setState({
+	        scale: 2
+	      });
+	    }
 
 	    /**
 	     * 手指移动
@@ -21242,7 +21291,7 @@
 	        var transPer = moveDis * (100 / this.state.totalPage) / SCREEN_WIDTH;
 
 	        if (this.state.pageIndex == 1 || this.state.pageIndex == this.state.totalPage - 2) {
-	          transPer = transPer / 2;
+	          transPer = transPer / 3;
 	        }
 	        this.setState({
 	          transPer: transPer
@@ -21255,6 +21304,11 @@
 	      var desktopWrapStyle = {
 	        transform: 'translate(-' + (100 / this.state.totalPage * this.state.pageIndex - this.state.transPer) + '%, 0)',
 	        transition: this.state.isDrag ? '' : '0.5s'
+
+	      };
+
+	      var scareStyle = {
+	        transform: 'scale(' + this.state.scale + ')'
 	      };
 	      return _react2.default.createElement(
 	        'div',
@@ -21268,7 +21322,7 @@
 	          _react2.default.createElement('div', { className: _Desktop2.default.page }),
 	          _react2.default.createElement(
 	            'div',
-	            { className: _Desktop2.default.page },
+	            { className: _Desktop2.default.page, style: scareStyle },
 	            _react2.default.createElement(
 	              'div',
 	              { className: _Desktop2.default.appWrap },
@@ -21353,7 +21407,7 @@
 
 
 	// module
-	exports.push([module.id, "._2oEweLizt8-tZSvnxk16Cl {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  cursor: default;\r\n}\r\n\r\n.m_yrlsAXMxCmC709mXgkf {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background: url(" + __webpack_require__(175) + ") no-repeat center center;\r\n  background-size: 346px;\r\n}\r\n\r\n.U5DlqS4UXtZ0Tfiugu_V9 {\r\n  position: relative;\r\n  width: 300%;\r\n  height: 444px;\r\n  margin-top: 20px;\r\n}\r\n\r\n._3T1-MZi-f5jrmhfjz8BWuJ {\r\n  float: left;\r\n  width: 33.33%;\r\n  height: 100%;\r\n}\r\n\r\n._1GwaT2UH3r3FwW_NPflfnZ {\r\n  position: relative;\r\n  height: 18px;\r\n}\r\n\r\n._35yx5unxikQdzFGepGcutS {\r\n  position: relative;\r\n  height: 80px;\r\n}\r\n\r\n._1pRqc4EHbSqyWjtYUkMFfb {\r\n  margin-top: 10px;\r\n}\r\n\r\n._1WYYRpgUSPZGZwGQUysmFm {\r\n  margin: 0 11.6px 0 11.6px;\r\n}\r\n\r\n.iconWrap {\r\n  float: left;\r\n  width: 50px;\r\n  height: 70px;\r\n  margin: 0 11.6px 4px;\r\n}\r\n\r\n.icon {\r\n  width: 50px;\r\n  height: 50px;\r\n  background-size: 50px;\r\n  background-position: 'center';\r\n  border-radius: 15px;\r\n  cursor: pointer;\r\n}\r\n\r\n.icon:active {\r\n  filter:brightness(0.5);\r\n  -webkit-filter:brightness(0.5);\r\n}\r\n\r\n.appname {\r\n  text-align: center;\r\n  font-size: 12px;\r\n  line-height: 20px;\r\n}", ""]);
+	exports.push([module.id, "._2oEweLizt8-tZSvnxk16Cl {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  cursor: default;\r\n}\r\n\r\n.m_yrlsAXMxCmC709mXgkf {\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background: url(" + __webpack_require__(175) + ") no-repeat center center;\r\n  background-size: 346px;\r\n}\r\n\r\n.U5DlqS4UXtZ0Tfiugu_V9 {\r\n  position: relative;\r\n  width: 300%;\r\n  height: 444px;\r\n  margin-top: 20px;\r\n}\r\n\r\n._3T1-MZi-f5jrmhfjz8BWuJ {\r\n  float: left;\r\n  width: 33.33%;\r\n  height: 100%;\r\n  transition: 1s;\r\n}\r\n\r\n._1GwaT2UH3r3FwW_NPflfnZ {\r\n  position: relative;\r\n  height: 18px;\r\n}\r\n\r\n._35yx5unxikQdzFGepGcutS {\r\n  position: relative;\r\n  height: 80px;\r\n}\r\n\r\n._1pRqc4EHbSqyWjtYUkMFfb {\r\n  margin-top: 10px;\r\n}\r\n\r\n._1WYYRpgUSPZGZwGQUysmFm {\r\n  margin: 0 11.6px 0 11.6px;\r\n}\r\n\r\n.iconWrap {\r\n  float: left;\r\n  width: 50px;\r\n  height: 70px;\r\n  margin: 0 11.6px 4px;\r\n}\r\n\r\n.icon {\r\n  width: 50px;\r\n  height: 50px;\r\n  background-size: 50px;\r\n  background-position: 'center';\r\n  border-radius: 15px;\r\n  cursor: pointer;\r\n}\r\n\r\n.icon:active {\r\n  filter:brightness(0.5);\r\n  -webkit-filter:brightness(0.5);\r\n}\r\n\r\n.appname {\r\n  text-align: center;\r\n  font-size: 12px;\r\n  line-height: 20px;\r\n}", ""]);
 
 	// exports
 	exports.locals = {

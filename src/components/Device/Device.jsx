@@ -37,6 +37,7 @@ class Device extends React.Component {
       clock.min = '00'.concat(clock.min.toString()).slice(clock.min.toString().length);
 
       this.refs.lockScreen.setClock(clock);
+      this.refs.navigation.setClock(clock);
       setTimeout(() => {
         this.clock();
       }, 1000)
@@ -99,7 +100,15 @@ class Device extends React.Component {
    */
   closeScreen() {
     clearInterval(this.state.leaveInterval);
-    this.refs.mask.close(this.refs.lockScreen.changeToMain.bind(this.refs.lockScreen));
+    this.refs.mask.close(() => {
+      // 锁屏切到主屏
+      this.refs.lockScreen.changeToMain();
+      // 桌面变大
+      this.refs.desktop.leave();
+      // 导航变为锁屏样式
+      this.refs.navigation.changeFontSize('big');
+      this.refs.navigation.changeTheme('black');
+    });
     this.refs.lockScreen.lock();
     this.setState({
       status: 'close',
@@ -131,16 +140,20 @@ class Device extends React.Component {
     this.refs.navigation.changeStyle(position);
   }
 
+  /*
+  * 锁屏状态改变
+  */
   lockStateChanged(state) {
     this.setState({
       status: state
     })
     if(state == 'lock') {
-      this.refs.navigation.changeFontSize('big');
-      this.refs.navigation.changeTheme('black');
+      // 导航改变字体和样式都写在closeScreen内
+      // 桌面退出写在closeScreen内
     }else if(state == 'unlock'){
       this.refs.navigation.changeFontSize('small');
       this.refs.navigation.changeTheme('black');
+      this.refs.desktop.enter();
     }
   }
 
@@ -153,7 +166,7 @@ class Device extends React.Component {
           <div className={style.receiver}></div>
         </div>
         <div className={style.screen} onMouseMove={this.handleMouseMove.bind(this)} onMouseLeave={this.prepareClose.bind(this)}>
-          <Desktop />
+          <Desktop ref="desktop"/>
           <LockScreen ref="lockScreen" swiperHandle={this.swiperHandle.bind(this)} lockStateChanged={this.lockStateChanged.bind(this)} />
           <Navigation ref="navigation" />
           <Mask ref="mask" />
