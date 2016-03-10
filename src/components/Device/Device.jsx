@@ -85,12 +85,12 @@ class Device extends React.Component {
  */
   openScreen() {
     clearInterval(this.state.leaveInterval);
+    this.refs.mask.open();
+    this.refs.lockScreen.open();
     this.setState({
       status: 'lock',
       leaveTime: 0
     })
-    this.refs.mask.open();
-    this.refs.lockScreen.open();
   }
 
   /**
@@ -99,12 +99,12 @@ class Device extends React.Component {
    */
   closeScreen() {
     clearInterval(this.state.leaveInterval);
+    this.refs.mask.close(this.refs.lockScreen.changeToMain.bind(this.refs.lockScreen));
+    this.refs.lockScreen.lock();
     this.setState({
       status: 'close',
       leaveTime: 0
     });
-    this.refs.mask.close(this.refs.lockScreen.changeToMain.bind(this.refs.lockScreen));
-    this.refs.lockScreen.lock();
   }
 
   /**
@@ -128,7 +128,20 @@ class Device extends React.Component {
   }
 
   swiperHandle(position) {
-    this.refs.navigation.changeTheme(position);
+    this.refs.navigation.changeStyle(position);
+  }
+
+  lockStateChanged(state) {
+    this.setState({
+      status: state
+    })
+    if(state == 'lock') {
+      this.refs.navigation.changeFontSize('big');
+      this.refs.navigation.changeTheme('black');
+    }else if(state == 'unlock'){
+      this.refs.navigation.changeFontSize('small');
+      this.refs.navigation.changeTheme('black');
+    }
   }
 
   render() {
@@ -141,7 +154,7 @@ class Device extends React.Component {
         </div>
         <div className={style.screen} onMouseMove={this.handleMouseMove.bind(this)} onMouseLeave={this.prepareClose.bind(this)}>
           <Desktop />
-          <LockScreen ref="lockScreen" swiperHandle={this.swiperHandle.bind(this)}/>
+          <LockScreen ref="lockScreen" swiperHandle={this.swiperHandle.bind(this)} lockStateChanged={this.lockStateChanged.bind(this)} />
           <Navigation ref="navigation" />
           <Mask ref="mask" />
         </div>

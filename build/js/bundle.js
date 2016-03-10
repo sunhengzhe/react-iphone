@@ -19814,12 +19814,12 @@
 	    key: 'openScreen',
 	    value: function openScreen() {
 	      clearInterval(this.state.leaveInterval);
+	      this.refs.mask.open();
+	      this.refs.lockScreen.open();
 	      this.setState({
 	        status: 'lock',
 	        leaveTime: 0
 	      });
-	      this.refs.mask.open();
-	      this.refs.lockScreen.open();
 	    }
 
 	    /**
@@ -19831,12 +19831,12 @@
 	    key: 'closeScreen',
 	    value: function closeScreen() {
 	      clearInterval(this.state.leaveInterval);
+	      this.refs.mask.close(this.refs.lockScreen.changeToMain.bind(this.refs.lockScreen));
+	      this.refs.lockScreen.lock();
 	      this.setState({
 	        status: 'close',
 	        leaveTime: 0
 	      });
-	      this.refs.mask.close(this.refs.lockScreen.changeToMain.bind(this.refs.lockScreen));
-	      this.refs.lockScreen.lock();
 	    }
 
 	    /**
@@ -19866,7 +19866,21 @@
 	  }, {
 	    key: 'swiperHandle',
 	    value: function swiperHandle(position) {
-	      this.refs.navigation.changeTheme(position);
+	      this.refs.navigation.changeStyle(position);
+	    }
+	  }, {
+	    key: 'lockStateChanged',
+	    value: function lockStateChanged(state) {
+	      this.setState({
+	        status: state
+	      });
+	      if (state == 'lock') {
+	        this.refs.navigation.changeFontSize('big');
+	        this.refs.navigation.changeTheme('black');
+	      } else if (state == 'unlock') {
+	        this.refs.navigation.changeFontSize('small');
+	        this.refs.navigation.changeTheme('black');
+	      }
 	    }
 	  }, {
 	    key: 'render',
@@ -19885,7 +19899,7 @@
 	          'div',
 	          { className: _Device2.default.screen, onMouseMove: this.handleMouseMove.bind(this), onMouseLeave: this.prepareClose.bind(this) },
 	          _react2.default.createElement(_Desktop2.default, null),
-	          _react2.default.createElement(_LockScreen2.default, { ref: 'lockScreen', swiperHandle: this.swiperHandle.bind(this) }),
+	          _react2.default.createElement(_LockScreen2.default, { ref: 'lockScreen', swiperHandle: this.swiperHandle.bind(this), lockStateChanged: this.lockStateChanged.bind(this) }),
 	          _react2.default.createElement(_Navigation2.default, { ref: 'navigation' }),
 	          _react2.default.createElement(_Mask2.default, { ref: 'mask' })
 	        ),
@@ -20441,13 +20455,15 @@
 	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(LockScreen)).call.apply(_Object$getPrototypeO, [this].concat(args)));
 
 	    _this.state = {
+	      startX: '',
 	      isDrag: false,
 	      isDoing: false,
 	      position: -50,
 	      curPage: 'main',
 	      bgWidth: SCREEN_WIDTH,
 	      password: '',
-	      time: {}
+	      time: {},
+	      isLocked: true
 	    };
 	    _this.keyTexts = [{ num: '1', en: '' }, { num: '2', en: 'A B C' }, { num: '3', en: 'D E F' }, { num: '4', en: 'G H I' }, { num: '5', en: 'J K L' }, { num: '6', en: 'M N O' }, { num: '7', en: 'P Q R S' }, { num: '8', en: 'T U V' }, { num: '9', en: 'W X Y Z' }, { num: '0', en: '' }];
 	    return _this;
@@ -20519,21 +20535,24 @@
 	  }, {
 	    key: 'handleMouseUp',
 	    value: function handleMouseUp(e) {
-	      switch (this.state.curPage) {
-	        case 'main':
-	          // 判断是否需要切换屏幕
-	          if (this.state.position > -42) {
-	            this.changeToPassword();
-	          } else {
-	            this.changeToMain();
-	          }
-	          break;
-	        case 'password':
-	          if (this.state.position < -38) {
-	            this.changeToMain();
-	          } else {
-	            this.changeToPassword();
-	          }
+	      //只在锁定屏幕下
+	      if (this.state.isLocked) {
+	        switch (this.state.curPage) {
+	          case 'main':
+	            // 判断是否需要切换屏幕
+	            if (this.state.position > -42) {
+	              this.changeToPassword();
+	            } else {
+	              this.changeToMain();
+	            }
+	            break;
+	          case 'password':
+	            if (this.state.position < -38) {
+	              this.changeToMain();
+	            } else {
+	              this.changeToPassword();
+	            }
+	        }
 	      }
 	    }
 
@@ -20544,7 +20563,7 @@
 	  }, {
 	    key: 'handleMouseMove',
 	    value: function handleMouseMove(e) {
-	      if (this.state.isDrag) {
+	      if (this.state.isDrag && this.state.isLocked) {
 	        var curX = e.pageX;
 	        // 左滑为 - 右滑为 +
 	        var moveDis = curX - this.state.startX;
@@ -20626,46 +20645,13 @@
 	    }
 
 	    /**
-	    * 屏幕解锁
-	    */
-
-	  }, {
-	    key: 'unlock',
-	    value: function unlock() {
-	      var _this4 = this;
-
-	      this.refs[this.state.curPage].style.transform = 'scale(0.5)';
-	      this.refs.lockScreen.style.opacity = '0';
-	      setTimeout(function () {
-	        _this4.refs.lockScreen.style.display = 'none';
-	      }, 500);
-	    }
-
-	    /**
-	    * 屏幕锁定
-	    */
-
-	  }, {
-	    key: 'lock',
-	    value: function lock() {
-	      var _this5 = this;
-
-	      setTimeout(function () {
-	        _this5.refs.lockScreen.style.display = 'block';
-	        _this5.refs.lockScreen.style.opacity = '1';
-	        _this5.refs[_this5.state.curPage].style.transform = 'scale(1)';
-	        _this5.close();
-	      }, 500);
-	    }
-
-	    /**
 	     * 屏幕关闭
 	     */
 
 	  }, {
 	    key: 'close',
 	    value: function close() {
-	      var _this6 = this;
+	      var _this4 = this;
 
 	      if (this.state.isDoing) {
 	        return;
@@ -20675,10 +20661,53 @@
 	        isDoing: true
 	      });
 	      setTimeout(function () {
-	        _this6.setState({
+	        _this4.setState({
 	          isDoing: false
 	        });
 	      }, 500);
+	    }
+
+	    /**
+	    * 屏幕解锁
+	    */
+
+	  }, {
+	    key: 'unlock',
+	    value: function unlock() {
+	      var _this5 = this;
+
+	      this.refs[this.state.curPage].style.transform = 'scale(0.5)';
+	      this.refs.lockScreen.style.opacity = '0';
+	      setTimeout(function () {
+	        _this5.refs.lockScreen.style.display = 'none';
+	      }, 500);
+	      this.setState({
+	        isLocked: false
+	      });
+	      //通知父组件
+	      this.props.lockStateChanged('unlock');
+	    }
+
+	    /**
+	    * 屏幕锁定
+	    */
+
+	  }, {
+	    key: 'lock',
+	    value: function lock() {
+	      var _this6 = this;
+
+	      setTimeout(function () {
+	        _this6.refs.lockScreen.style.display = 'block';
+	        _this6.refs.lockScreen.style.opacity = '1';
+	        _this6.refs[_this6.state.curPage].style.transform = 'scale(1)';
+	        _this6.close();
+	      }, 500);
+	      this.setState({
+	        isLocked: true
+	      });
+	      //通知父组件
+	      this.props.lockStateChanged('lock');
 	    }
 
 	    /**
@@ -20925,15 +20954,15 @@
 	    _this.state = {
 	      signal: 4,
 	      theme: 'black',
-	      state: 'lock',
+	      fontSize: 'big',
 	      opacity: 1
 	    };
 	    return _this;
 	  }
 
 	  _createClass(Navigation, [{
-	    key: 'changeTheme',
-	    value: function changeTheme(position) {
+	    key: 'changeStyle',
+	    value: function changeStyle(position) {
 	      if (position < -41) {
 	        this.setState({
 	          theme: 'black',
@@ -20947,13 +20976,39 @@
 	      }
 	    }
 	  }, {
+	    key: 'changeFontSize',
+	    value: function changeFontSize(size) {
+	      this.setState({
+	        fontSize: size
+	      });
+	    }
+	  }, {
+	    key: 'changeTheme',
+	    value: function changeTheme(theme) {
+	      this.setState({
+	        theme: theme
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
 
+	      var fontSize = '';
+	      if (this.state.fontSize == 'big') {
+	        fontSize = '0.7em';
+	      } else if (this.state.fontSize == 'small') {
+	        fontSize = '0.6em';
+	      }
+
+	      var navStyle = {
+	        opacity: this.state.opacity,
+	        fontSize: fontSize
+	      };
+
 	      return _react2.default.createElement(
 	        'div',
-	        { className: _Navigation2.default.navigation + ' ' + this.state.theme, style: { opacity: this.state.opacity } },
+	        { className: _Navigation2.default.navigation + ' ' + this.state.theme, style: navStyle },
 	        _react2.default.createElement(
 	          'div',
 	          { className: _Navigation2.default.left },
@@ -21037,7 +21092,7 @@
 
 
 	// module
-	exports.push([module.id, "._3-n_N0doPih_dfVqas0z0Y {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  height: 20px;\r\n  padding: 0.2em;\r\n  line-height: 20px;\r\n  font-size: 0.7em;\r\n}\r\n\r\n._11KjG33LAFoJeJuQ2RrwCD {\r\n  float: left;\r\n}\r\n\r\n._3sxKGk763mJdqWxHWGXqI0 {\r\n  float: right;\r\n}\r\n\r\n._2OpxAKILNBSfJ2ZggB5R9p {\r\n\r\n}\r\n\r\n._28p6eCJu8sSNmQ19WKsFx8 {\r\n  margin: 0 0.2em;\r\n}\r\n\r\n._3RgvZhrYR7BVjsKJZEt38e {\r\n  margin-left: 0.2em;\r\n  margin-top: -0.1em;\r\n}\r\n\r\n._3RgvZhrYR7BVjsKJZEt38e span{\r\n  display: inline-block;\r\n  width: 0.4em;\r\n  height: 0.4em;\r\n  margin: 0 0.1em;\r\n  border-radius: 50%;\r\n  border: 0.5px #000 solid;\r\n}\r\n\r\n.black {\r\n  color: #000000;\r\n}\r\n\r\n.black ._3RgvZhrYR7BVjsKJZEt38e span {\r\n  border-color: #000000;\r\n}\r\n\r\n.black ._3RgvZhrYR7BVjsKJZEt38e span.fill {\r\n  background-color: #000000;\r\n}\r\n\r\n.white {\r\n  color: #ffffff;\r\n}\r\n\r\n.white ._3RgvZhrYR7BVjsKJZEt38e span {\r\n  border-color: #ffffff;\r\n}\r\n\r\n.white ._3RgvZhrYR7BVjsKJZEt38e span.fill {\r\n  background-color: #ffffff;\r\n}", ""]);
+	exports.push([module.id, "._3-n_N0doPih_dfVqas0z0Y {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  height: 1em;\r\n  padding: 0.2em;\r\n  line-height: 1em;\r\n  font-size: 0.7em;\r\n}\r\n\r\n._11KjG33LAFoJeJuQ2RrwCD {\r\n  float: left;\r\n}\r\n\r\n._3sxKGk763mJdqWxHWGXqI0 {\r\n  float: right;\r\n}\r\n\r\n._2OpxAKILNBSfJ2ZggB5R9p {\r\n\r\n}\r\n\r\n._28p6eCJu8sSNmQ19WKsFx8 {\r\n  margin: 0 0.2em;\r\n}\r\n\r\n._3RgvZhrYR7BVjsKJZEt38e {\r\n  margin-left: 0.2em;\r\n  margin-top: -0.1em;\r\n}\r\n\r\n._3RgvZhrYR7BVjsKJZEt38e span{\r\n  display: inline-block;\r\n  width: 0.4em;\r\n  height: 0.4em;\r\n  margin: 0 0.1em;\r\n  border-radius: 50%;\r\n  border: 0.5px #000 solid;\r\n}\r\n\r\n.black {\r\n  color: #000000;\r\n}\r\n\r\n.black ._3RgvZhrYR7BVjsKJZEt38e span {\r\n  border-color: #000000;\r\n}\r\n\r\n.black ._3RgvZhrYR7BVjsKJZEt38e span.fill {\r\n  background-color: #000000;\r\n}\r\n\r\n.white {\r\n  color: #ffffff;\r\n}\r\n\r\n.white ._3RgvZhrYR7BVjsKJZEt38e span {\r\n  border-color: #ffffff;\r\n}\r\n\r\n.white ._3RgvZhrYR7BVjsKJZEt38e span.fill {\r\n  background-color: #ffffff;\r\n}", ""]);
 
 	// exports
 	exports.locals = {
@@ -21099,20 +21154,107 @@
 	  appid: 'Safari'
 	}];
 
+	var SCREEN_WIDTH = 346;
+
 	var Desktop = function (_React$Component) {
 	  _inherits(Desktop, _React$Component);
 
 	  function Desktop() {
+	    var _Object$getPrototypeO;
+
 	    _classCallCheck(this, Desktop);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Desktop).apply(this, arguments));
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Desktop)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+
+	    _this.state = {
+	      startX: '',
+	      isDrag: false,
+	      position: -33.33,
+	      totalPage: 3,
+	      pageIndex: 1,
+	      transPer: 0
+	    };
+	    return _this;
 	  }
 
+	  /**
+	  * 按下手指
+	  */
+
+
 	  _createClass(Desktop, [{
+	    key: 'handleMouseDown',
+	    value: function handleMouseDown(e) {
+	      this.setState({
+	        isDrag: true,
+	        startX: e.pageX
+	      });
+	    }
+	  }, {
+	    key: 'slide',
+	    value: function slide(direct) {
+	      var endIndex = this.state.pageIndex + direct;
+	      if (endIndex <= 0 || endIndex >= this.state.totalPage - 1) {
+	        endIndex = this.state.pageIndex;
+	      }
+	      this.setState({
+	        pageIndex: endIndex,
+	        transPer: 0,
+	        isDrag: false
+	      });
+	    }
+
+	    /**
+	    * 手指离开屏幕
+	    */
+
+	  }, {
+	    key: 'handleMouseUp',
+	    value: function handleMouseUp(e) {
+	      var transPer = this.state.transPer;
+	      // 滑动屏幕25%时切换页面
+	      // console.log(transPer, (25 / this.state.totalPage))
+	      if (transPer < -(20 / this.state.totalPage)) {
+	        this.slide(1);
+	      } else if (transPer > 25 / this.state.totalPage) {
+	        this.slide(-1);
+	      } else {
+	        this.slide(0);
+	      }
+	    }
+
+	    /**
+	     * 手指移动
+	     */
+
+	  }, {
+	    key: 'handleMouseMove',
+	    value: function handleMouseMove(e) {
+	      if (this.state.isDrag) {
+	        var curX = e.pageX;
+	        // 左滑为 - 右滑为 +
+	        var moveDis = curX - this.state.startX;
+	        // 移动的百分比数
+	        var transPer = moveDis * (100 / this.state.totalPage) / SCREEN_WIDTH;
+
+	        if (this.state.pageIndex == 1 || this.state.pageIndex == this.state.totalPage - 2) {
+	          transPer = transPer / 2;
+	        }
+	        this.setState({
+	          transPer: transPer
+	        });
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var desktopWrapStyle = {
-	        transform: 'translate(-33.33%, 0)'
+	        transform: 'translate(-' + (100 / this.state.totalPage * this.state.pageIndex - this.state.transPer) + '%, 0)',
+	        transition: this.state.isDrag ? '' : '0.5s'
 	      };
 	      return _react2.default.createElement(
 	        'div',
@@ -21120,7 +21262,9 @@
 	        _react2.default.createElement('div', { className: _Desktop2.default.bgWrap }),
 	        _react2.default.createElement(
 	          'div',
-	          { className: _Desktop2.default.desktopWrap, style: desktopWrapStyle },
+	          { className: _Desktop2.default.desktopWrap, style: desktopWrapStyle, onMouseDown: this.handleMouseDown.bind(this),
+	            onMouseMove: this.handleMouseMove.bind(this), onMouseUp: this.handleMouseUp.bind(this),
+	            onMouseLeave: this.handleMouseUp.bind(this) },
 	          _react2.default.createElement('div', { className: _Desktop2.default.page }),
 	          _react2.default.createElement(
 	            'div',

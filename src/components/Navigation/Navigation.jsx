@@ -7,12 +7,12 @@ class Navigation extends React.Component {
     this.state = {
       signal: 4,
       theme: 'black',
-      state: 'lock',
+      fontSize: 'big',
       opacity: 1
     }
   }
 
-  changeTheme(position) {
+  changeStyle(position) {
     if(position < -41) {
       this.setState({
         theme: 'black',
@@ -26,10 +26,33 @@ class Navigation extends React.Component {
     }
   }
 
+  changeFontSize(size) {
+    this.setState({
+      fontSize: size
+    })
+  }
+
+  changeTheme(theme) {
+    this.setState({
+      theme: theme
+    })
+  }
+
   render() {
+    let fontSize = '';
+    if(this.state.fontSize == 'big') {
+      fontSize = '0.7em';
+    }else if(this.state.fontSize == 'small') {
+      fontSize = '0.6em';
+    }
+
+    let navStyle = {
+      opacity: this.state.opacity,
+      fontSize: fontSize
+    }
 
     return (
-      <div className={style.navigation + ' ' + this.state.theme} style={{opacity: this.state.opacity}}>
+      <div className={style.navigation + ' ' + this.state.theme} style={navStyle}>
         <div className={style.left}>
           <div className={style.signal + ' ' + style.left}>
             {

@@ -10,13 +10,15 @@ class LockScreen extends React.Component {
   constructor(...args) {
     super(...args);
     this.state = {
+      startX: '',
       isDrag: false,
       isDoing: false,
       position: -50,
       curPage: 'main',
       bgWidth: SCREEN_WIDTH,
       password: '',
-      time: {}
+      time: {},
+      isLocked: true
     };
     this.keyTexts = [
       {num: '1', en: ''},
@@ -82,7 +84,9 @@ class LockScreen extends React.Component {
  * 手指离开屏幕
  */
   handleMouseUp(e) {
-    switch (this.state.curPage) {
+    //只在锁定屏幕下
+    if(this.state.isLocked) {
+     switch (this.state.curPage) {
       case 'main':
         // 判断是否需要切换屏幕
         if(this.state.position > -42) {
@@ -97,6 +101,7 @@ class LockScreen extends React.Component {
         }else{
           this.changeToPassword();
         }
+      }
     }
   }
 
@@ -104,7 +109,7 @@ class LockScreen extends React.Component {
    * 手指移动
    */
   handleMouseMove(e) {
-    if(this.state.isDrag) {
+    if(this.state.isDrag && this.state.isLocked) {
       let curX = e.pageX;
       // 左滑为 - 右滑为 +
       let moveDis = curX - this.state.startX;
@@ -176,29 +181,6 @@ class LockScreen extends React.Component {
   }
 
   /**
-  * 屏幕解锁
-  */
-  unlock() {
-    this.refs[this.state.curPage].style.transform = 'scale(0.5)';
-    this.refs.lockScreen.style.opacity = '0';
-    setTimeout(() => {
-      this.refs.lockScreen.style.display = 'none';
-    }, 500);
-  }
-
-  /**
-  * 屏幕锁定
-  */
-  lock() {
-    setTimeout(() => {
-      this.refs.lockScreen.style.display = 'block';
-      this.refs.lockScreen.style.opacity = '1';
-      this.refs[this.state.curPage].style.transform = 'scale(1)';
-      this.close();
-    }, 500);
-  }
-
-  /**
    * 屏幕关闭
    */
   close() {
@@ -214,6 +196,39 @@ class LockScreen extends React.Component {
         isDoing: false
       })
     }, 500);
+  }
+
+  /**
+  * 屏幕解锁
+  */
+  unlock() {
+    this.refs[this.state.curPage].style.transform = 'scale(0.5)';
+    this.refs.lockScreen.style.opacity = '0';
+    setTimeout(() => {
+      this.refs.lockScreen.style.display = 'none';
+    }, 500);
+    this.setState({
+      isLocked: false
+    })
+    //通知父组件
+    this.props.lockStateChanged('unlock');
+  }
+
+  /**
+  * 屏幕锁定
+  */
+  lock() {
+    setTimeout(() => {
+      this.refs.lockScreen.style.display = 'block';
+      this.refs.lockScreen.style.opacity = '1';
+      this.refs[this.state.curPage].style.transform = 'scale(1)';
+      this.close();
+    }, 500);
+    this.setState({
+      isLocked: true
+    })
+    //通知父组件
+    this.props.lockStateChanged('lock');
   }
 
   /**
