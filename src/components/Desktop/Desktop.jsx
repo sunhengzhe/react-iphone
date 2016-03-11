@@ -1,6 +1,8 @@
 import React from 'react';
 import style from './Desktop.css';
 
+import AppManager from '../AppManager/AppManager.jsx';
+
 const desktopApps = [
   {
     appname: "设置",
@@ -39,11 +41,9 @@ class Desktop extends React.Component {
     this.state = {
       startX: '',
       isDrag: false,
-      position: -33.33,
       totalPage: 3,
       pageIndex: 1,
-      transPer: 0,
-      scale: 2
+      transPer: 0
     }
   }
 
@@ -57,6 +57,10 @@ class Desktop extends React.Component {
     });
   }
 
+/**
+ * 滑动
+ * @param  number 1:页数+1  -1:页数减1
+ */
   slide(direct) {
     let endIndex = this.state.pageIndex + direct;
     if(endIndex <= 0 || endIndex >= this.state.totalPage - 1){
@@ -85,16 +89,24 @@ class Desktop extends React.Component {
     }
   }
 
+/**
+ * 进入桌面
+ * @return {[type]} [description]
+ */
   enter() {
-    this.setState({
-      scale: 1
-    })
+    if(!this.refs.appManager.isAppHere()){
+      this.refs.curPage.style.transform = 'scale(1)';
+      this.refs.toolPanel.style.transform = 'translate(0, 0)';
+    }
   }
 
+/**
+ * 离开桌面
+ * @return {[type]} [description]
+ */
   leave() {
-    this.setState({
-      scale: 2
-    })
+    this.refs.curPage.style.transform = 'scale(2)';
+    this.refs.toolPanel.style.transform = 'translate(0, 100%)';
   }
 
   /**
@@ -117,6 +129,26 @@ class Desktop extends React.Component {
     }
   }
 
+  /**
+   * 打开App
+   * @param  {[type]} appid [description]
+   * @return {[type]}       [description]
+   */
+  openApp(appid, index) {
+    this.leave();
+    this.refs.appManager.openApp(appid, index);
+  }
+
+  /**
+   * 响应Home键
+   * @return {[type]} [description]
+   */
+  answerHome() {
+    if(!this.refs.appManager.hideApp()) {
+      // 移动桌面至主屏幕
+    }
+  }
+
   render() {
     let desktopWrapStyle = {
       transform: 'translate(-' + (100 / this.state.totalPage * this.state.pageIndex - this.state.transPer) + '%, 0)',
@@ -124,9 +156,6 @@ class Desktop extends React.Component {
 
     }
 
-    let scareStyle = {
-      transform: 'scale(' + this.state.scale + ')'
-    }
     return (
       <div className={style.desktop}>
         <div className={style.bgWrap}></div>
@@ -134,13 +163,14 @@ class Desktop extends React.Component {
         onMouseMove={this.handleMouseMove.bind(this)} onMouseUp={this.handleMouseUp.bind(this)}
         onMouseLeave={this.handleMouseUp.bind(this)}>
           <div className={style.page}></div>
-          <div className={style.page} style={scareStyle}>
+          <div className={style.page} ref="curPage" >
             <div className={style.appWrap}>
               {
                 desktopApps.map((item, index) => {
                   return (
                     <div key={index} className="iconWrap">
-                      <div className="icon" style={{backgroundImage: 'url('+require(`../apps/${item.appid}/images/icon.png`)+')' }}></div>
+                      <div className="icon" style={{backgroundImage: 'url('+require(`../apps/${item.appid}/images/icon.png`)+')' }}
+                        onClick={this.openApp.bind(this, item.appid, index)} ></div>
                       <div className="appname">{item.appname}</div>
                     </div>
                   )
@@ -153,7 +183,7 @@ class Desktop extends React.Component {
         <div className={style.indexWrap}>
 
         </div>
-        <div className={style.toolWrap}>
+        <div className={style.toolWrap} ref="toolPanel">
           <div className={style.bottomWrap}>
           {
             bottomApps.map((item, index) => {
@@ -167,6 +197,7 @@ class Desktop extends React.Component {
           }
           </div>
         </div>
+        <AppManager ref="appManager" enterDesktop={this.enter.bind(this)}/>
       </div>
     );
   }

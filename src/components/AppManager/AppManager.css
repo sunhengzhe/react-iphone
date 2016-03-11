@@ -1,0 +1,16 @@
+:global .app {
+  transition: 0.5s;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #cccccc;
+}
+
+:global .open .app{
+  -webkit-transform: scale(1);
+        transform: scale(1);
+}

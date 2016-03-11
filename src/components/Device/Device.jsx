@@ -56,6 +56,9 @@ class Device extends React.Component {
     }else if(this.state.status == 'lock') {
       // 移到主屏幕
       this.refs.lockScreen.changeToMain();
+    }else if(this.state.status == 'unlock') {
+      // 关闭App
+      this.refs.desktop.answerHome();
     }
   }
 
@@ -89,7 +92,6 @@ class Device extends React.Component {
     this.refs.mask.open();
     this.refs.lockScreen.open();
     this.setState({
-      status: 'lock',
       leaveTime: 0
     })
   }
