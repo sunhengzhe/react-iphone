@@ -152,8 +152,7 @@ class Desktop extends React.Component {
   render() {
     let desktopWrapStyle = {
       transform: 'translate(-' + (100 / this.state.totalPage * this.state.pageIndex - this.state.transPer) + '%, 0)',
-      transition: this.state.isDrag ? '' : '0.5s',
-
+      transition: this.state.isDrag ? '' : '0.5s'
     }
 
     return (
@@ -163,7 +162,7 @@ class Desktop extends React.Component {
         onMouseMove={this.handleMouseMove.bind(this)} onMouseUp={this.handleMouseUp.bind(this)}
         onMouseLeave={this.handleMouseUp.bind(this)}>
           <div className={style.page}></div>
-          <div className={style.page} ref="curPage" >
+          <div className={style.page + ' curPage'} ref="curPage" >
             <div className={style.appWrap}>
               {
                 desktopApps.map((item, index) => {

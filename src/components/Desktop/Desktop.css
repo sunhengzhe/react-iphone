@@ -28,6 +28,9 @@
   float: left;
   width: 33.33%;
   height: 100%;
+}
+
+:global .curPage {
   transition: 1s;
   -webkit-transform: scale(2);
           transform: scale(2);
