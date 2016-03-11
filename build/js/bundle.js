@@ -19819,10 +19819,17 @@
 	    value: function openScreen() {
 	      clearInterval(this.state.leaveInterval);
 	      this.refs.mask.open();
-	      this.refs.lockScreen.open();
-	      this.setState({
-	        leaveTime: 0
-	      });
+	      this.refs.lockScreen.enter();
+	      if (this.state.status == 'close') {
+	        this.setState({
+	          status: 'lock',
+	          leaveTime: 0
+	        });
+	      } else {
+	        this.setState({
+	          leaveTime: 0
+	        });
+	      }
 	    }
 
 	    /**
@@ -20641,12 +20648,12 @@
 	    }
 
 	    /**
-	     * 屏幕打开
+	     * 进入锁屏
 	     */
 
 	  }, {
-	    key: 'open',
-	    value: function open() {
+	    key: 'enter',
+	    value: function enter() {
 	      var _this3 = this;
 
 	      if (this.state.isDoing) {
@@ -20664,12 +20671,12 @@
 	    }
 
 	    /**
-	     * 屏幕关闭
+	     * 退出锁屏
 	     */
 
 	  }, {
-	    key: 'close',
-	    value: function close() {
+	    key: 'leave',
+	    value: function leave() {
 	      var _this4 = this;
 
 	      if (this.state.isDoing) {
@@ -20716,11 +20723,11 @@
 	    value: function lock() {
 	      var _this6 = this;
 
+	      this.leave();
 	      setTimeout(function () {
 	        _this6.refs.lockScreen.style.display = 'block';
 	        _this6.refs.lockScreen.style.opacity = '1';
 	        _this6.refs[_this6.state.curPage].style.transform = 'scale(1)';
-	        _this6.close();
 	      }, 500);
 	      this.setState({
 	        isLocked: true

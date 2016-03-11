@@ -90,10 +90,17 @@ class Device extends React.Component {
   openScreen() {
     clearInterval(this.state.leaveInterval);
     this.refs.mask.open();
-    this.refs.lockScreen.open();
-    this.setState({
-      leaveTime: 0
-    })
+    this.refs.lockScreen.enter();
+    if(this.state.status == 'close') {
+      this.setState({
+        status: 'lock',
+        leaveTime: 0
+      })
+    } else {
+      this.setState({
+        leaveTime: 0
+      })
+    }
   }
 
   /**

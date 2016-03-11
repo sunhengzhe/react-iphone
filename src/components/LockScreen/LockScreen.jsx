@@ -163,9 +163,9 @@ class LockScreen extends React.Component {
   }
 
   /**
-   * 屏幕打开
+   * 进入锁屏
    */
-  open() {
+  enter() {
     if(this.state.isDoing) {
       return;
     }
@@ -181,9 +181,9 @@ class LockScreen extends React.Component {
   }
 
   /**
-   * 屏幕关闭
+   * 退出锁屏
    */
-  close() {
+  leave() {
     if(this.state.isDoing) {
       return;
     }
@@ -218,11 +218,11 @@ class LockScreen extends React.Component {
   * 屏幕锁定
   */
   lock() {
+    this.leave();
     setTimeout(() => {
       this.refs.lockScreen.style.display = 'block';
       this.refs.lockScreen.style.opacity = '1';
       this.refs[this.state.curPage].style.transform = 'scale(1)';
-      this.close();
     }, 500);
     this.setState({
       isLocked: true
