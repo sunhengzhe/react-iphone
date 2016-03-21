@@ -1,0 +1,25 @@
+.listItem {
+  height: 38px;
+  background-color: #ffffff;
+}
+
+.iconWrap, .contentWrap {
+  float: left;
+  height: 38px;
+}
+
+.iconWrap {
+  width: 16.6%;
+}
+
+.contentWrap {
+  width: 83.4%;
+  height: 36px;
+  line-height: 38px;
+  font-size: 14px;
+  border-bottom: 1px #eeeeee solid;
+}
+
+.listItem:last-child .contentWrap {
+  border-bottom-color: transparent;
+}

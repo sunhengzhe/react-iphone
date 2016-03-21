@@ -21643,6 +21643,10 @@
 
 	var _Setting2 = _interopRequireDefault(_Setting);
 
+	var _ListItem = __webpack_require__(192);
+
+	var _ListItem2 = _interopRequireDefault(_ListItem);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21669,7 +21673,46 @@
 	  _createClass(Setting, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('div', { className: 'app' });
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'app ' + _Setting2.default.setting },
+	        _react2.default.createElement(
+	          'div',
+	          { className: _Setting2.default.title },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            '设置'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: _Setting2.default.content },
+	          _react2.default.createElement(
+	            'div',
+	            { className: _Setting2.default.searchBox },
+	            _react2.default.createElement('input', { className: _Setting2.default.searchInput, type: 'text' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: _Setting2.default.listWrap },
+	            _react2.default.createElement(_ListItem2.default, { name: '飞行模式' }),
+	            _react2.default.createElement(_ListItem2.default, { name: 'Wi-Fi' }),
+	            _react2.default.createElement(_ListItem2.default, { name: '蓝牙' }),
+	            _react2.default.createElement(_ListItem2.default, { name: '蜂窝移动网络' }),
+	            _react2.default.createElement(_ListItem2.default, { name: '个人热点' }),
+	            _react2.default.createElement(_ListItem2.default, { name: 'VPN' }),
+	            _react2.default.createElement(_ListItem2.default, { name: '运营商' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: _Setting2.default.listWrap },
+	            _react2.default.createElement(_ListItem2.default, { name: '通知' }),
+	            _react2.default.createElement(_ListItem2.default, { name: '控制中心' }),
+	            _react2.default.createElement(_ListItem2.default, { name: '勿扰模式' })
+	          )
+	        )
+	      );
 	    }
 	  }]);
 
@@ -21799,10 +21842,17 @@
 
 
 	// module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, "._3XYJPbn9_ZzP11TaVuVreC {\n  background: rgb(239, 239, 244);\n}\n\n._1VysBGoWD6Dmn-b4yc5qr0 {\n  width: 100%;\n  height: 55px;\n  background-color: rgb(245, 245, 247);\n  text-align: center;\n  line-height: 70px;\n  position: fixed;\n}\n\n._1VysBGoWD6Dmn-b4yc5qr0 h1 {\n  font-size: 14px;\n}\n\n._2JSzsELlqdHWubllKIZZVT {\n  padding-top: 55px;\n}\n\n._25ay8yOxOQoEE8Hk28gNbe {\n  padding: 8px;\n  background-color: rgb(200, 200, 205);\n}\n\n._3GvHa3fHfGYKCnqrqHixhP {\n  outline: none;\n  border: none;\n  border-radius: 5px;\n  width: 100%;\n  height: 20px;\n}\n\n.FE9xRKJxHwqkY78K1EEVv {\n  margin: 30px 0;\n  border-top: 1px #eeeeee solid;\n  border-bottom: 1px #eeeeee solid;\n}", ""]);
 
 	// exports
-
+	exports.locals = {
+		"setting": "_3XYJPbn9_ZzP11TaVuVreC",
+		"title": "_1VysBGoWD6Dmn-b4yc5qr0",
+		"content": "_2JSzsELlqdHWubllKIZZVT",
+		"searchBox": "_25ay8yOxOQoEE8Hk28gNbe",
+		"searchInput": "_3GvHa3fHfGYKCnqrqHixhP",
+		"listWrap": "FE9xRKJxHwqkY78K1EEVv"
+	};
 
 /***/ },
 /* 183 */
@@ -21839,7 +21889,7 @@
 
 
 	// module
-	exports.push([module.id, ".app {\n  transition: 0.5s;\n  -webkit-transform: scale(0);\n          transform: scale(0);\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  background-color: #cccccc;\n}\n\n.open .app{\n  -webkit-transform: scale(1);\n        transform: scale(1);\n}", ""]);
+	exports.push([module.id, ".app {\n  transition: 0.5s;\n  -webkit-transform: scale(0);\n          transform: scale(0);\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n}\n\n.open .app{\n  -webkit-transform: scale(1);\n        transform: scale(1);\n}", ""]);
 
 	// exports
 
@@ -21905,6 +21955,114 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "/build/images/0934127bee8dc9d17642b96746c771d9.png";
+
+/***/ },
+/* 192 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ListItem = __webpack_require__(193);
+
+	var _ListItem2 = _interopRequireDefault(_ListItem);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ListItem = function (_React$Component) {
+	  _inherits(ListItem, _React$Component);
+
+	  function ListItem() {
+	    var _Object$getPrototypeO;
+
+	    _classCallCheck(this, ListItem);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(ListItem)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+	  }
+
+	  _createClass(ListItem, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: _ListItem2.default.listItem },
+	        _react2.default.createElement('div', { className: _ListItem2.default.iconWrap }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: _ListItem2.default.contentWrap },
+	          this.props.name
+	        )
+	      );
+	    }
+	  }]);
+
+	  return ListItem;
+	}(_react2.default.Component);
+
+	exports.default = ListItem;
+
+/***/ },
+/* 193 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(194);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(163)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js?modules!./ListItem.css", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js?modules!./ListItem.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 194 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(162)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".QHT1whtDKXxph28YsZpyq {\n  height: 38px;\n  background-color: #ffffff;\n}\n\n._3FVeUZQIRw-q5dLa0bkugk, .T-iEkLXAK2nZrMiYRZdNK {\n  float: left;\n  height: 38px;\n}\n\n._3FVeUZQIRw-q5dLa0bkugk {\n  width: 16.6%;\n}\n\n.T-iEkLXAK2nZrMiYRZdNK {\n  width: 83.4%;\n  height: 36px;\n  line-height: 38px;\n  font-size: 14px;\n  border-bottom: 1px #eeeeee solid;\n}\n\n.QHT1whtDKXxph28YsZpyq:last-child .T-iEkLXAK2nZrMiYRZdNK {\n  border-bottom-color: transparent;\n}", ""]);
+
+	// exports
+	exports.locals = {
+		"listItem": "QHT1whtDKXxph28YsZpyq",
+		"iconWrap": "_3FVeUZQIRw-q5dLa0bkugk",
+		"contentWrap": "T-iEkLXAK2nZrMiYRZdNK"
+	};
 
 /***/ }
 /******/ ]);
